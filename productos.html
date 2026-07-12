@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos | Squirrel Frames</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            corePlugins: { preflight: false },
+            theme: { extend: { colors: { brand: { 500: '#2D3D33' } } } }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FFFFFF;
+            --surface: #F5F2ED;
+            --surface-light: #EDE8E0;
+            --primary: #2D3D33;
+            --text: #2D3D33;
+            --text-secondary: #000000;
+            --border: rgba(163, 131, 109, .15);
+            --container: 1400px;
+            --transition: .35s ease;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text); font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+        .top-bar { height: 36px; display: flex; justify-content: center; align-items: center; border-bottom: 1px solid var(--border); background: #2D3D33; }
+        .top-bar p { font-size: .85rem; color: var(--text-secondary); }
+        img { display: block; width: 100%; }
+        a { color: inherit; text-decoration: none; }
+        button { border: none; background: none; font: inherit; cursor: pointer; }
+        .container { width: min(92%, var(--container)); margin: auto; }
+
+        .header {
+            position: sticky; top: 0; z-index: 999; backdrop-filter: blur(18px);
+            background: rgba(255, 255, 255, .95); border-bottom: 1px solid var(--border);
+        }
+        .header .container { height: 92px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+        .logo-img { width: 42px; height: 42px; border-radius: 12px; object-fit: contain; }
+        .logo-text { font-size: 1.5rem; font-weight: 700; }
+        .logo-text span { color: var(--primary); }
+        .nav { display: flex; gap: 32px; flex-wrap: wrap; justify-content: center; }
+        .nav a, .nav button {
+            position: relative; font-weight: 500; font-size: .95rem;
+            color: var(--text-secondary); transition: var(--transition); background: none;
+        }
+        .nav a:hover, .nav button:hover { color: var(--primary); }
+        .nav a::after, .nav button::after {
+            content: ''; position: absolute; left: 0; bottom: -8px; width: 0; height: 2px;
+            background: var(--primary); transition: var(--transition);
+        }
+        .nav a:hover::after, .nav button:hover::after { width: 100%; }
+        .header-actions { display: flex; align-items: center; gap: 20px; }
+        .cart-button { position: relative; font-size: 1.4rem; color: var(--text-secondary); }
+        .admin-btn { font-size: 1.2rem; color: var(--text-secondary); opacity: 0.4; transition: var(--transition); }
+        .admin-btn:hover { opacity: 1; color: var(--primary); }
+        .cart-count {
+            position: absolute; top: -8px; right: -12px; width: 22px; height: 22px; border-radius: 50%;
+            background: var(--primary); color: #F5F2ED; font-size: .75rem; font-weight: 700;
+            display: flex; justify-content: center; align-items: center; border: 2px solid var(--bg);
+        }
+        .btn-primary {
+            padding: 14px 26px; border-radius: 999px; background: var(--primary);
+            color: #F5F2ED; font-weight: 700; transition: var(--transition);
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(45, 61, 51, .35); }
+
+        .product-card {
+            background: var(--surface); border-radius: 20px; overflow: hidden;
+            border: 1px solid var(--border); transition: var(--transition);
+        }
+        .product-card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 15px 35px rgba(45, 61, 51, .18); }
+        .product-card img { width: 100%; aspect-ratio: 3/4; object-fit: cover; transition: .35s; }
+        .product-card:hover img { transform: scale(1.05); }
+        .product-info { padding: 20px; }
+        .product-info h3 { margin-bottom: 8px; font-size: 1.1rem; }
+        .product-price { font-size: 1.1rem; font-weight: 700; color: #2D3D33; margin-bottom: 10px; }
+        .add-cart-btn {
+            width: 100%; padding: 12px; border-radius: 12px;
+            background: var(--surface-light); color: var(--text);
+            font-weight: 600; transition: var(--transition);
+        }
+        .add-cart-btn:hover { background: var(--primary); color: #F5F2ED; }
+
+        .breadcrumb { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); font-size: .9rem; margin-bottom: 30px; }
+        .breadcrumb a { color: var(--text-secondary); transition: var(--transition); }
+        .breadcrumb a:hover { color: var(--primary); }
+        .breadcrumb .current { color: var(--text); font-weight: 600; }
+        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--text-secondary); font-weight: 500; margin-bottom: 40px; transition: var(--transition); }
+        .back-btn:hover { color: var(--primary); }
+
+        .footer { margin-top: 120px; padding: 70px 0 30px; background: #2D3D33; border-top: 1px solid var(--border); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 50px; }
+        .footer-logo { width: 60px; margin-bottom: 18px; }
+        .footer-col h2 { font-size: 1.5rem; margin-bottom: 15px; }
+        .footer-col h3 { font-size: 1.1rem; margin-bottom: 20px; }
+        .footer-text { color: var(--text-secondary); line-height: 1.7; }
+        .footer a { display: block; margin-bottom: 12px; color: #E8E0D6; transition: var(--transition); }
+        .footer a:hover { color: var(--primary); }
+        .footer p { margin-bottom: 10px; color: #E8E0D6; }
+        .footer-copy { margin-top: 60px; padding-top: 25px; text-align: center; color: #000000; border-top: 1px solid var(--border); }
+
+        @media (max-width: 900px) {
+            .header .container { height: auto; padding: 16px 0; flex-wrap: wrap; gap: 16px; }
+            .nav { gap: 16px; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar">
+        <p>✨ Diseños premium • Calidad garantizada • Envíos disponibles</p>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="https://placehold.co/42x42/2D3D33/F5F2ED?text=SF" alt="SquirrelFrames" class="logo-img">
+                <span class="logo-text">Squirrel<span>Frames</span></span>
+            </a>
+            <nav class="nav" id="nav-categorias"></nav>
+            <div class="header-actions">
+                <a href="carrito.html" class="cart-button" title="Carrito">🛒<span class="cart-count" id="cart-counter">0</span></a>
+                <a href="index.html" class="btn-primary">Comprar</a>
+                <a href="admin.html" class="admin-btn" title="Admin">🔧</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="py-20">
+        <div class="container">
+            <a href="#" onclick="history.back(); return false;" class="back-btn">← Volver a colecciones</a>
+            <div class="breadcrumb">
+                <a href="index.html">Categorías</a>
+                <span>/</span>
+                <a id="breadcrumb-cat-link" href="colecciones.html">Colecciones</a>
+                <span>/</span>
+                <span class="current" id="breadcrumb-serie">Serie</span>
+            </div>
+            <div class="section-header text-center mb-16">
+                <h1 id="page-title" class="text-4xl md:text-5xl font-bold">Diseños disponibles</h1>
+                <p class="text-zinc-400 max-w-xl mx-auto mt-4 leading-relaxed" id="page-subtitle">Selecciona tu diseño favorito.</p>
+            </div>
+            <div id="productos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <img src="https://placehold.co/60x60/2D3D33/F5F2ED?text=SF" alt="SquirrelFrames" class="footer-logo">
+                <h2>SquirrelFrames</h2>
+                <p class="footer-text">Cuadros y pósters premium inspirados en anime, videojuegos, deportes y cultura pop.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Enlaces</h3>
+                <a href="index.html">Inicio</a>
+                <a href="colecciones.html">Colecciones</a>
+                <a href="#">Personalizar</a>
+                <a href="admin.html">Admin</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contacto</h3>
+                <p>📱 WhatsApp</p>
+                <a href="#">+57 300 000 0000</a>
+                <a href="#">Instagram</a>
+                <a href="#">TikTok</a>
+            </div>
+            <div class="footer-col">
+                <h3>Métodos de pago</h3>
+                <p>💲 Binance</p>
+                <p>🟢 Nequi</p>
+                <p>📲 Pago Móvil</p>
+            </div>
+        </div>
+        <div class="container footer-copy">© 2026 SquirrelFrames • Todos los derechos reservados.</div>
+    </footer>
+
+    <script>
+        function getParam(name) {
+            return new URLSearchParams(window.location.search).get(name);
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            let allCategorias = [], allSeries = [], allProductos = [];
+            try {
+                const r = await fetch('data.json');
+                if (r.ok) {
+                    const data = await r.json();
+                    allCategorias = data.categorias || [];
+                    allSeries = data.series || [];
+                    allProductos = data.productos || [];
+                }
+            } catch (e) {
+                console.error('Error al cargar datos:', e);
+            }
+
+            // Nav
+            const nav = document.getElementById('nav-categorias');
+            nav.innerHTML = '<a href="index.html">Todo</a>';
+            allCategorias.forEach(c => {
+                nav.innerHTML += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + c.Nombre + '</a>';
+            });
+
+            // Filter
+            const serieId = getParam('serie_id');
+            const serie = allSeries.find(s => s.ID == serieId);
+            if (!serie) {
+                document.getElementById('page-title').textContent = 'Serie no encontrada';
+                document.getElementById('productos-grid').innerHTML = '<p class="text-zinc-500 text-center py-20 col-span-full">Serie no encontrada.</p>';
+                return;
+            }
+
+            const cat = allCategorias.find(c => c.ID === serie.Categoria_ID);
+            document.getElementById('page-title').textContent = serie.Nombre;
+            document.getElementById('page-subtitle').textContent = (serie.Descripcion || '') + ' — Selecciona tu diseño favorito.';
+            document.getElementById('breadcrumb-serie').textContent = serie.Nombre;
+            if (cat) {
+                document.getElementById('breadcrumb-cat-link').href = 'colecciones.html?categoria_id=' + cat.ID;
+                document.getElementById('breadcrumb-cat-link').textContent = cat.Nombre;
+            }
+
+            const filtered = allProductos.filter(p => p.Serie_ID == serieId);
+            const grid = document.getElementById('productos-grid');
+            if (!filtered.length) {
+                grid.innerHTML = '<p class="text-zinc-500 text-center py-20 col-span-full">No hay diseños en esta colección aún.</p>';
+            } else {
+                filtered.forEach(p => {
+                    grid.innerHTML +=
+                        '<div class="product-card" data-id="' + p.ID + '" onclick="location.href=\'detalle.html?id=' + p.ID + '\'">' +
+                            '<img src="' + p.URL_Imagen + '" onerror="this.src=\'https://placehold.co/600x800/2D3D33/F5F2ED?text=Error\'" alt="' + p.Nombre + '">' +
+                            '<div class="product-info">' +
+                                '<h3>' + p.Nombre + '</h3>' +
+                                (p.Precio ? '<p class="product-price">' + p.Precio + '</p>' : '') +
+                                '<button class="add-cart-btn" onclick="addToCart(this, event)">Añadir al carrito</button>' +
+                            '</div>' +
+                        '</div>';
+                });
+            }
+        });
+
+        function extraerNumeroPrecio(str) {
+            if (!str) return 0;
+            const match = str.replace(/[^0-9.,]/g, '').replace(',', '.');
+            const num = parseFloat(match);
+            return isNaN(num) ? 0 : num;
+        }
+
+        function actualizarContadorCarrito() {
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            const total = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+            document.getElementById('cart-counter').textContent = total;
+        }
+
+        window.addToCart = (btn, ev) => {
+            if (ev) ev.stopPropagation();
+            const card = btn.closest('.product-card');
+            if (!card) return;
+
+            const id = parseInt(card.dataset.id);
+            const titulo = card.querySelector('h3').textContent;
+            const img = card.querySelector('img').src;
+            const precioTexto = card.querySelector('.product-price')?.textContent || '';
+            const precioBase = extraerNumeroPrecio(precioTexto);
+
+            const item = {
+                id: id,
+                titulo: titulo,
+                imagen: img,
+                precioFinal: precioBase,
+                cantidad: 1,
+                opciones: { tamaño: 'Carta', marco: 'Solo Lámina' }
+            };
+
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+            const existente = carrito.findIndex(i =>
+                i.id === item.id &&
+                i.opciones.tamaño === item.opciones.tamaño &&
+                i.opciones.marco === item.opciones.marco
+            );
+
+            if (existente > -1) {
+                carrito[existente].cantidad += 1;
+            } else {
+                carrito.push(item);
+            }
+
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            actualizarContadorCarrito();
+
+            btn.textContent = '✓ Agregado';
+            btn.style.background = '#22c55e';
+            btn.style.color = '#000';
+            setTimeout(() => {
+                btn.textContent = 'Añadir al carrito';
+                btn.style.background = '';
+                btn.style.color = '';
+            }, 1000);
+        };
+
+        actualizarContadorCarrito();
+    </script>
+</body>
+</html>

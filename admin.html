@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Squirrel Frames</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #2D3D33;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+        }
+
+        /* ===== CONTENEDOR FLOTANTE ===== */
+        .admin-container {
+            width: 100%;
+            max-width: 1440px;
+            height: calc(100vh - 48px);
+            max-height: 960px;
+            background: #121212;
+            border-radius: 24px;
+            border: 1px solid #2a2a2a;
+            display: flex;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, .6);
+        }
+
+        /* ===== BOTÓN CERRAR ===== */
+        .close-btn {
+            position: absolute;
+            top: 18px;
+            right: 20px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid #333;
+            background: transparent;
+            color: #666;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: .3s;
+            z-index: 20;
+        }
+
+        .close-btn:hover {
+            background: #2a2a2a;
+            color: #fff;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: 260px;
+            background: #2D3D33;
+            padding: 32px 20px;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            border-right: 1px solid #1f1f1f;
+        }
+
+        .sidebar-logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: #F5F2ED;
+            letter-spacing: -1px;
+            margin-bottom: 48px;
+            padding: 0 12px;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            border-radius: 999px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #888;
+            transition: .3s;
+            cursor: pointer;
+            border: none;
+            background: none;
+            text-align: left;
+            width: 100%;
+        }
+
+        .nav-item i {
+            width: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .nav-item:hover {
+            color: #ccc;
+            background: #1a1a1a;
+        }
+
+        .nav-item.active {
+            background: #2D3D33;
+            color: #000;
+            font-weight: 600;
+        }
+
+        .nav-item.active i {
+            color: #f59e0b;
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding: 12px;
+        }
+
+        .sidebar-footer button {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            color: #ef4444;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: .3s;
+            width: 100%;
+        }
+
+        .sidebar-footer button:hover {
+            background: rgba(239, 68, 68, .1);
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main {
+            flex: 1;
+            background: #121212;
+            padding: 32px 36px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 36px;
+        }
+
+        .main-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .btn-new {
+            padding: 12px 28px;
+            border-radius: 999px;
+            background: #2D3D33;
+            color: #000;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .btn-new:hover {
+            box-shadow: 0 8px 24px rgba(45, 61, 51, .35);
+            transform: translateY(-2px);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #252525;
+            transition: .3s;
+        }
+
+        .stat-card:hover {
+            border-color: #2D3D33;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(45, 61, 51, .12);
+        }
+
+        .stat-card .label {
+            font-size: 13px;
+            color: #888;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .value {
+            font-size: 42px;
+            font-weight: 700;
+            color: #2D3D33;
+            line-height: 1;
+        }
+
+        /* ===== SECCIONES DINÁMICAS ===== */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .section-header h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .btn-add {
+            padding: 10px 22px;
+            border-radius: 999px;
+            background: #2D3D33;
+            color: #000;
+            font-weight: 600;
+            font-size: 13px;
+            border: none;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .btn-add:hover {
+            box-shadow: 0 6px 20px rgba(45, 61, 51, .3);
+        }
+
+        /* Grids para cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .admin-card {
+            background: #1a1a1a;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #252525;
+            transition: .3s;
+            cursor: pointer;
+        }
+
+        .admin-card:hover {
+            border-color: #2D3D33;
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(45, 61, 51, .12);
+        }
+
+        .admin-card .card-img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            display: block;
+        }
+
+        .admin-card .card-body {
+            padding: 16px;
+        }
+
+        .admin-card .card-body h4 {
+            font-size: 15px;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .admin-card .card-body p {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .admin-card .card-actions {
+            display: flex;
+            gap: 8px;
+            padding: 0 16px 16px;
+        }
+
+        .admin-card .card-actions button {
+            flex: 1;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .btn-edit {
+            background: #252525;
+            color: #2D3D33;
+        }
+
+        .btn-edit:hover {
+            background: #303030;
+        }
+
+        .btn-del {
+            background: #252525;
+            color: #ef4444;
+        }
+
+        .btn-del:hover {
+            background: rgba(239, 68, 68, .15);
+        }
+
+        /* Modales */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            background: #1a1a1a;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 460px;
+            padding: 32px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .modal h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 24px;
+        }
+
+        .modal label {
+            display: block;
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .modal input,
+        .modal textarea,
+        .modal select {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            background: #121212;
+            border: 1px solid #2a2a2a;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: .3s;
+            margin-bottom: 18px;
+        }
+
+        .modal input:focus,
+        .modal textarea:focus,
+        .modal select:focus {
+            border-color: #2D3D33;
+        }
+
+        .modal textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .modal-btns {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .modal-btns button {
+            padding: 10px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 13px;
+            border: none;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .btn-cancel {
+            background: #252525;
+            color: #888;
+        }
+
+        .btn-cancel:hover {
+            background: #303030;
+        }
+
+        .btn-save {
+            background: #2D3D33;
+            color: #000;
+        }
+
+        .btn-save:hover {
+            box-shadow: 0 6px 20px rgba(45, 61, 51, .3);
+        }
+
+        /* Scrollbar */
+        .main::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .main::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .main::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 3px;
+        }
+
+        /* Login */
+        .login-view {
+            position: fixed;
+            inset: 0;
+            background: #2D3D33;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+        }
+
+        .login-view.hidden {
+            display: none;
+        }
+
+        .login-box {
+            background: #121212;
+            border: 1px solid #2a2a2a;
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 380px;
+        }
+
+        .login-box h2 {
+            color: #fff;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .login-box p {
+            color: #888;
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            margin-bottom: 14px;
+        }
+
+        .login-box input:focus {
+            border-color: #2D3D33;
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            background: #2D3D33;
+            color: #000;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .login-box button:hover {
+            box-shadow: 0 6px 20px rgba(45, 61, 51, .3);
+        }
+
+        .login-error {
+            color: #ef4444;
+            font-size: 13px;
+            margin-bottom: 14px;
+            display: none;
+            text-align: center;
+        }
+
+        .login-error.show {
+            display: block;
+        }
+
+        @media (max-width: 900px) {
+            body {
+                padding: 0;
+            }
+
+            .admin-container {
+                max-height: none;
+                height: 100vh;
+                border-radius: 0;
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 16px;
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: center;
+                border-right: none;
+                border-bottom: 1px solid #1f1f1f;
+            }
+
+            .sidebar-logo {
+                margin-bottom: 0;
+                font-size: 22px;
+                margin-right: 16px;
+            }
+
+            .sidebar-nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 4px;
+                flex: 1;
+            }
+
+            .nav-item {
+                padding: 8px 14px;
+                font-size: 13px;
+                width: auto;
+            }
+
+            .sidebar-footer {
+                display: none;
+            }
+
+            .close-btn {
+                display: none;
+            }
+
+            .main {
+                padding: 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-header {
+                flex-direction: column;
+                gap: 12px;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- LOGIN -->
+    <div class="login-view" id="login-view">
+        <div class="login-box">
+            <h2>Admin</h2>
+            <p>Ingresa tus credenciales</p>
+            <p class="login-error" id="login-error">Credenciales inválidas</p>
+            <input type="text" id="username" placeholder="Usuario">
+            <input type="password" id="password" placeholder="Contraseña">
+            <button onclick="login()">Ingresar</button>
+        </div>
+    </div>
+
+    <!-- ADMIN CONTAINER -->
+    <div class="admin-container" id="dashboard">
+
+        <button class="close-btn" onclick="logout()"><i class="fas fa-times"></i></button>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">Squirrel<span style="color:#A3836D;">Frames</span></div>
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')">
+                    <i class="fas fa-chart-simple"></i> Dashboard
+                </button>
+                <button class="nav-item" data-tab="personajes" onclick="switchTab('personajes')">
+                    <i class="fas fa-user"></i> Personajes
+                </button>
+                <button class="nav-item" data-tab="colecciones" onclick="switchTab('colecciones')">
+                    <i class="fas fa-folder"></i> Colecciones
+                </button>
+                <button class="nav-item" data-tab="categorias" onclick="switchTab('categorias')">
+                    <i class="fas fa-layer-group"></i> Categorías
+                </button>
+                <button class="nav-item" data-tab="config" onclick="switchTab('config')">
+                    <i class="fas fa-gear"></i> Configuración
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <button onclick="logout()"><i class="fas fa-right-from-bracket"></i> Cerrar Sesión</button>
+            </div>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="main">
+
+            <!-- HEADER -->
+            <div class="main-header">
+                <h1>Dashboard</h1>
+                <button class="btn-new" onclick="openModal('personaje')">+ Nuevo personaje</button>
+            </div>
+
+            <!-- STATS -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="label">Personajes</div>
+                    <div class="value" id="stat-personajes">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Colecciones</div>
+                    <div class="value" id="stat-colecciones">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Categorías</div>
+                    <div class="value" id="stat-categorias">0</div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN: CATEGORÍAS -->
+            <div class="section" id="sec-categorias">
+                <div class="section-header">
+                    <h2>Categorías</h2>
+                    <button class="btn-add" onclick="openModal('categoria')">+ Nueva</button>
+                </div>
+                <div id="categorias-grid" class="card-grid"></div>
+            </div>
+
+            <!-- SECCIÓN: COLECCIONES -->
+            <div class="section" id="sec-colecciones">
+                <div class="section-header">
+                    <h2>Colecciones</h2>
+                    <button class="btn-add" onclick="openModal('coleccion')">+ Nueva</button>
+                </div>
+                <div id="colecciones-grid" class="card-grid"></div>
+            </div>
+
+            <!-- SECCIÓN: PERSONAJES -->
+            <div class="section" id="sec-personajes">
+                <div class="section-header">
+                    <h2>Personajes</h2>
+                    <button class="btn-add" onclick="openModal('personaje')">+ Nuevo</button>
+                </div>
+                <div id="personajes-grid" class="card-grid"></div>
+            </div>
+
+            <!-- SECCIÓN: CONFIG -->
+            <div class="section" id="sec-config">
+                <div class="section-header">
+                    <h2>Configuración</h2>
+                </div>
+                <p style="color:#888;">Panel de administración de SquirrelFrames.</p>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- MODAL CATEGORÍA -->
+    <div class="modal-overlay" id="modal-categoria">
+        <div class="modal">
+            <h3 id="modal-cat-title">Nueva Categoría</h3>
+            <input type="hidden" id="cat-id">
+            <label>Nombre</label>
+            <input type="text" id="cat-nombre" placeholder="Ej. Anime">
+            <label>URL de Imagen</label>
+            <input type="text" id="cat-url" placeholder="https://...">
+            <div class="modal-btns">
+                <button class="btn-cancel" onclick="closeModal('categoria')">Cancelar</button>
+                <button class="btn-save" onclick="saveCategoria()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL COLECCIÓN -->
+    <div class="modal-overlay" id="modal-coleccion">
+        <div class="modal">
+            <h3 id="modal-col-title">Nueva Colección</h3>
+            <input type="hidden" id="col-id">
+            <label>Nombre</label>
+            <input type="text" id="col-nombre" placeholder="Ej. Dragon Ball Z">
+            <label>Descripción</label>
+            <textarea id="col-desc" placeholder="Descripción de la colección..."></textarea>
+            <label>URL de Imagen</label>
+            <input type="text" id="col-url" placeholder="https://...">
+            <label>Categoría</label>
+            <select id="col-cat"></select>
+            <div class="modal-btns">
+                <button class="btn-cancel" onclick="closeModal('coleccion')">Cancelar</button>
+                <button class="btn-save" onclick="saveColeccion()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PERSONAJE -->
+    <div class="modal-overlay" id="modal-personaje">
+        <div class="modal">
+            <h3 id="modal-pers-title">Nuevo Personaje</h3>
+            <input type="hidden" id="pers-id">
+            <label>Nombre</label>
+            <input type="text" id="pers-nombre" placeholder="Ej. Goku Ultra Instinct">
+            <label>URL de Imagen</label>
+            <input type="text" id="pers-url" placeholder="https://...">
+            <label>Precio</label>
+            <input type="text" id="pers-precio" placeholder="Ej. $15.00, 10 USD, Consultar...">
+            <label>Asignar a Categoría (opcional)</label>
+            <select id="pers-cat">
+                <option value="">Sin categoría</option>
+            </select>
+            <label>Asignar a Colección (opcional)</label>
+            <select id="pers-col">
+                <option value="">Sin colección</option>
+            </select>
+            <div class="modal-btns">
+                <button class="btn-cancel" onclick="closeModal('personaje')">Cancelar</button>
+                <button class="btn-save" onclick="savePersonaje()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API = 'http://localhost:5000/api';
+        let allCategorias = [], allColecciones = [], allPersonajes = [];
+        let currentTab = 'dashboard';
+
+        // ===== AUTH =====
+        function checkAuth() {
+            if (sessionStorage.getItem('admin_auth') !== 'true') {
+                document.getElementById('login-view').classList.remove('hidden');
+                document.getElementById('dashboard').style.display = 'none';
+            } else {
+                document.getElementById('login-view').classList.add('hidden');
+                document.getElementById('dashboard').style.display = 'flex';
+                loadAll();
+            }
+        }
+
+        async function login() {
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
+            const err = document.getElementById('login-error');
+            try {
+                const r = await fetch(API + '/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ usuario: u, contrasena: p })
+                });
+                const d = await r.json();
+                if (d.success) {
+                    sessionStorage.setItem('admin_auth', 'true');
+                    checkAuth();
+                } else {
+                    err.textContent = d.message;
+                    err.classList.add('show');
+                }
+            } catch (e) {
+                err.textContent = 'Error al conectar con la API';
+                err.classList.add('show');
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem('admin_auth');
+            checkAuth();
+        }
+
+        // ===== NAVEGACIÓN =====
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+            const btn = document.querySelector(`.nav-item[data-tab="${tab}"]`);
+            if (btn) btn.classList.add('active');
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            const sec = document.getElementById('sec-' + tab);
+            if (sec) sec.classList.add('active');
+            if (tab === 'categorias') renderCategorias();
+            if (tab === 'colecciones') renderColecciones();
+            if (tab === 'personajes') renderPersonajes();
+        }
+
+        // ===== MODALES =====
+        function openModal(type) {
+            document.getElementById('modal-' + type).classList.add('show');
+        }
+        function closeModal(type) {
+            document.getElementById('modal-' + type).classList.remove('show');
+        }
+
+        // ===== CARGA =====
+        async function loadAll() {
+            const [rC, rS, rP] = await Promise.all([
+                fetch(API + '/categorias'),
+                fetch(API + '/series'),
+                fetch(API + '/productos')
+            ]);
+            if (rC.ok) allCategorias = await rC.json();
+            if (rS.ok) allColecciones = await rS.json();
+            if (rP.ok) allPersonajes = await rP.json();
+            updateStats();
+        }
+
+        function updateStats() {
+            document.getElementById('stat-personajes').textContent = allPersonajes.length;
+            document.getElementById('stat-colecciones').textContent = allColecciones.length;
+            document.getElementById('stat-categorias').textContent = allCategorias.length;
+        }
+
+        // ===== CATEGORÍAS =====
+        function renderCategorias() {
+            const g = document.getElementById('categorias-grid');
+            g.innerHTML = '';
+            if (!allCategorias.length) { g.innerHTML = '<p class="no-data" style="color:#888;grid-column:1/-1;padding:40px 0">Sin categorías</p>'; return; }
+            allCategorias.forEach(c => {
+                g.innerHTML +=
+                    '<div class="admin-card">' +
+                    '<img src="' + (c.URL_Imagen || 'https://placehold.co/400x600/2D3D33/F5F2ED?text=' + c.Nombre) + '" class="card-img" onerror="this.src=\'https://placehold.co/400x600/2D3D33/F5F2ED?text=' + c.Nombre + '\'">' +
+                    '<div class="card-body"><h4>' + c.Nombre + '</h4><p>' + (allColecciones.filter(s => s.Categoria_ID === c.ID).length) + ' colecciones</p></div>' +
+                    '<div class="card-actions">' +
+                    '<button class="btn-edit" onclick="editCategoria(' + c.ID + ',\'' + c.Nombre.replace(/'/g, "\\'") + '\',\'' + (c.URL_Imagen || '').replace(/'/g, "\\'") + '\')"><i class="fas fa-pen"></i></button>' +
+                    '<button class="btn-del" onclick="deleteCategoria(' + c.ID + ')"><i class="fas fa-trash"></i></button>' +
+                    '</div>' +
+                    '</div>';
+            });
+        }
+
+        function editCategoria(id, nombre, url) {
+            document.getElementById('cat-id').value = id;
+            document.getElementById('cat-nombre').value = nombre;
+            document.getElementById('cat-url').value = url;
+            document.getElementById('modal-cat-title').textContent = 'Editar Categoría';
+            openModal('categoria');
+        }
+
+        async function saveCategoria() {
+            const id = document.getElementById('cat-id').value;
+            const nombre = document.getElementById('cat-nombre').value;
+            const url_imagen = document.getElementById('cat-url').value;
+            if (!nombre) return alert('El nombre es requerido');
+            const r = await fetch(id ? API + '/categorias/' + id : API + '/categorias', {
+                method: id ? 'PUT' : 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nombre, url_imagen })
+            });
+            const d = await r.json();
+            if (!d.success) return alert(d.message);
+            closeModal('categoria');
+            document.getElementById('cat-id').value = '';
+            document.getElementById('cat-nombre').value = '';
+            document.getElementById('cat-url').value = '';
+            document.getElementById('modal-cat-title').textContent = 'Nueva Categoría';
+            const res = await fetch(API + '/categorias');
+            if (res.ok) allCategorias = await res.json();
+            updateStats();
+            renderCategorias();
+        }
+
+        async function deleteCategoria(id) {
+            if (!confirm('¿Eliminar esta categoría?')) return;
+            await fetch(API + '/categorias/' + id, { method: 'DELETE' });
+            const [rC, rS] = await Promise.all([fetch(API + '/categorias'), fetch(API + '/series')]);
+            if (rC.ok) allCategorias = await rC.json();
+            if (rS.ok) allColecciones = await rS.json();
+            updateStats();
+            renderCategorias();
+        }
+
+        // ===== COLECCIONES =====
+        function renderColecciones() {
+            const g = document.getElementById('colecciones-grid');
+            g.innerHTML = '';
+            if (!allColecciones.length) { g.innerHTML = '<p class="no-data" style="color:#888;grid-column:1/-1;padding:40px 0">Sin colecciones</p>'; return; }
+            allColecciones.forEach(s => {
+                const cat = allCategorias.find(c => c.ID === s.Categoria_ID);
+                g.innerHTML +=
+                    '<div class="admin-card">' +
+                    '<img src="' + (s.URL_Imagen || 'https://placehold.co/400x600/2D3D33/F5F2ED?text=' + s.Nombre) + '" class="card-img" onerror="this.src=\'https://placehold.co/400x600/2D3D33/F5F2ED?text=' + s.Nombre + '\'">' +
+                    '<div class="card-body"><h4>' + s.Nombre + '</h4><p>' + (cat ? cat.Nombre : 'Sin categoría') + ' · ' + (allPersonajes.filter(p => p.Serie_ID === s.ID).length) + ' personajes</p></div>' +
+                    '<div class="card-actions">' +
+                    '<button class="btn-edit" onclick="editColeccion(' + s.ID + ',\'' + s.Nombre.replace(/'/g, "\\'") + '\',\'' + (s.Descripcion || '').replace(/'/g, "\\'") + '\',\'' + (s.URL_Imagen || '').replace(/'/g, "\\'") + '\',' + s.Categoria_ID + ')"><i class="fas fa-pen"></i></button>' +
+                    '<button class="btn-del" onclick="deleteColeccion(' + s.ID + ')"><i class="fas fa-trash"></i></button>' +
+                    '</div>' +
+                    '</div>';
+            });
+        }
+
+        function populateCatSelect(selectId, selected) {
+            const sel = document.getElementById(selectId);
+            sel.innerHTML = '<option value="">Seleccionar categoría</option>';
+            allCategorias.forEach(c => {
+                sel.innerHTML += '<option value="' + c.ID + '"' + (selected == c.ID ? ' selected' : '') + '>' + c.Nombre + '</option>';
+            });
+        }
+
+        async function saveColeccion() {
+            const id = document.getElementById('col-id').value;
+            const nombre = document.getElementById('col-nombre').value;
+            const descripcion = document.getElementById('col-desc').value;
+            const url_imagen = document.getElementById('col-url').value;
+            const categoria_id = document.getElementById('col-cat').value;
+            if (!nombre || !categoria_id) return alert('Nombre y categoría requeridos');
+            const r = await fetch(id ? API + '/series/' + id : API + '/series', {
+                method: id ? 'PUT' : 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nombre, descripcion, url_imagen, categoria_id })
+            });
+            const d = await r.json();
+            if (!d.success) return alert(d.message);
+            closeModal('coleccion');
+            document.getElementById('col-id').value = '';
+            document.getElementById('col-nombre').value = '';
+            document.getElementById('col-desc').value = '';
+            document.getElementById('col-url').value = '';
+            const res = await fetch(API + '/series');
+            if (res.ok) allColecciones = await res.json();
+            updateStats();
+            renderColecciones();
+        }
+
+        function editColeccion(id, nombre, desc, url, cat_id) {
+            document.getElementById('col-id').value = id;
+            document.getElementById('col-nombre').value = nombre;
+            document.getElementById('col-desc').value = desc;
+            document.getElementById('col-url').value = url;
+            populateCatSelect('col-cat', cat_id);
+            document.getElementById('modal-col-title').textContent = 'Editar Colección';
+            openModal('coleccion');
+        }
+
+        async function deleteColeccion(id) {
+            if (!confirm('¿Eliminar esta colección?')) return;
+            await fetch(API + '/series/' + id, { method: 'DELETE' });
+            const [rS, rP] = await Promise.all([fetch(API + '/series'), fetch(API + '/productos')]);
+            if (rS.ok) allColecciones = await rS.json();
+            if (rP.ok) allPersonajes = await rP.json();
+            updateStats();
+            renderColecciones();
+        }
+
+        // ===== PERSONAJES =====
+        function renderPersonajes() {
+            const g = document.getElementById('personajes-grid');
+            g.innerHTML = '';
+            if (!allPersonajes.length) { g.innerHTML = '<p class="no-data" style="color:#888;grid-column:1/-1;padding:40px 0">Sin personajes</p>'; return; }
+            allPersonajes.forEach(p => {
+                const col = allColecciones.find(s => s.ID === p.Serie_ID);
+                const cat = allCategorias.find(c => c.ID === p.Categoria_ID);
+                let parent = col ? col.Nombre : (cat ? cat.Nombre : '');
+                g.innerHTML +=
+                    '<div class="admin-card">' +
+                    '<img src="' + p.URL_Imagen + '" class="card-img" onerror="this.src=\'https://placehold.co/400x600/2D3D33/F5F2ED?text=Error\'">' +
+                    '<div class="card-body"><h4>' + p.Nombre + '</h4><p>' + (parent || 'Sin asignar') + (p.Precio ? ' · ' + p.Precio : '') + '</p></div>' +
+                    '<div class="card-actions">' +
+                    '<button class="btn-edit" onclick="editPersonaje(' + p.ID + ',\'' + p.Nombre.replace(/'/g, "\\'") + '\',\'' + (p.URL_Imagen || '').replace(/'/g, "\\'") + '\',' + (p.Categoria_ID || 'null') + ',' + (p.Serie_ID || 'null') + ')"><i class="fas fa-pen"></i></button>' +
+                    '<button class="btn-del" onclick="deletePersonaje(' + p.ID + ')"><i class="fas fa-trash"></i> Eliminar</button>' +
+                    '</div>' +
+                    '</div>';
+            });
+        }
+
+        function populatePersonajeDropdowns() {
+            const selCat = document.getElementById('pers-cat');
+            selCat.innerHTML = '<option value="">Sin categoría</option>';
+            allCategorias.forEach(c => {
+                selCat.innerHTML += '<option value="' + c.ID + '">' + c.Nombre + '</option>';
+            });
+            const selCol = document.getElementById('pers-col');
+            selCol.innerHTML = '<option value="">Sin colección</option>';
+            allColecciones.forEach(s => {
+                selCol.innerHTML += '<option value="' + s.ID + '">' + s.Nombre + '</option>';
+            });
+        }
+
+        function editPersonaje(id, nombre, url, cat_id, serie_id) {
+            document.getElementById('pers-id').value = id;
+            document.getElementById('pers-nombre').value = nombre;
+            document.getElementById('pers-url').value = url;
+            document.getElementById('modal-pers-title').textContent = 'Editar Personaje';
+            populatePersonajeDropdowns();
+            if (cat_id && cat_id !== 'null') document.getElementById('pers-cat').value = cat_id;
+            if (serie_id && serie_id !== 'null') document.getElementById('pers-col').value = serie_id;
+            const p = allPersonajes.find(x => x.ID === id);
+            document.getElementById('pers-precio').value = p ? (p.Precio || '') : '';
+            openModal('personaje');
+        }
+
+        async function savePersonaje() {
+            const id = document.getElementById('pers-id').value;
+            const nombre = document.getElementById('pers-nombre').value;
+            const url_imagen = document.getElementById('pers-url').value;
+            const categoria_id = document.getElementById('pers-cat').value;
+            const serie_id = document.getElementById('pers-col').value;
+            const precio = document.getElementById('pers-precio').value;
+            if (!nombre || !url_imagen) return alert('Nombre e imagen son requeridos');
+            if (!categoria_id && !serie_id) return alert('Debe asignarse a una categoría o colección');
+            const url = id ? API + '/productos/' + id : API + '/productos';
+            const method = id ? 'PUT' : 'POST';
+            const r = await fetch(url, {
+                method: method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nombre, url_imagen, serie_id: serie_id || null, categoria_id: categoria_id || null, precio })
+            });
+            const d = await r.json();
+            if (!d.success) return alert(d.message);
+            closeModal('personaje');
+            document.getElementById('pers-id').value = '';
+            document.getElementById('pers-nombre').value = '';
+            document.getElementById('pers-url').value = '';
+            document.getElementById('pers-precio').value = '';
+            document.getElementById('modal-pers-title').textContent = 'Nuevo Personaje';
+            const res = await fetch(API + '/productos');
+            if (res.ok) allPersonajes = await res.json();
+            updateStats();
+            renderPersonajes();
+        }
+
+        async function deletePersonaje(id) {
+            if (!confirm('¿Eliminar este personaje?')) return;
+            await fetch(API + '/productos/' + id, { method: 'DELETE' });
+            const res = await fetch(API + '/productos');
+            if (res.ok) allPersonajes = await res.json();
+            updateStats();
+            renderPersonajes();
+        }
+
+        // ===== MODAL HANDLERS =====
+        document.getElementById('modal-personaje').addEventListener('show', function () {
+            if (!document.getElementById('pers-id').value) {
+                document.getElementById('modal-pers-title').textContent = 'Nuevo Personaje';
+                document.getElementById('pers-nombre').value = '';
+                document.getElementById('pers-url').value = '';
+                document.getElementById('pers-precio').value = '';
+                populatePersonajeDropdowns();
+            }
+        });
+        document.getElementById('modal-categoria').addEventListener('show', function () {
+            if (!document.getElementById('cat-id').value) {
+                document.getElementById('modal-cat-title').textContent = 'Nueva Categoría';
+                document.getElementById('cat-id').value = '';
+                document.getElementById('cat-nombre').value = '';
+                document.getElementById('cat-url').value = '';
+            }
+        });
+        document.getElementById('modal-coleccion').addEventListener('show', function () {
+            if (!document.getElementById('col-id').value) {
+                document.getElementById('modal-col-title').textContent = 'Nueva Colección';
+                document.getElementById('col-id').value = '';
+                document.getElementById('col-nombre').value = '';
+                document.getElementById('col-desc').value = '';
+                document.getElementById('col-url').value = '';
+                populateCatSelect('col-cat');
+            }
+        });
+
+        const origOpen = openModal;
+        openModal = function (type) {
+            const evt = new Event('show');
+            const el = document.getElementById('modal-' + type);
+            el.dispatchEvent(evt);
+            el.classList.add('show');
+        };
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' && !document.getElementById('login-view').classList.contains('hidden')) {
+                login();
+            }
+        });
+
+        checkAuth();
+    </script>
+</body>
+
+</html>

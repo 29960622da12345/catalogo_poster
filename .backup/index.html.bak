@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squirrel Frames | Tu diseño favorito, en el cuadro perfecto</title>
+    <meta name="description"
+        content="Descubre pósters y cuadros premium inspirados en cultura pop, videojuegos y deportes.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            corePlugins: { preflight: false },
+            theme: { extend: { colors: { brand: { 500: '#38bdf8' } } } }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050505;
+            --surface: #111111;
+            --surface-light: #1A1A1A;
+            --primary: #38bdf8;
+            --text: #FFFFFF;
+            --text-secondary: #BDBDBD;
+            --border: rgba(255, 255, 255, .08);
+            --container: 1400px;
+            --radius: 18px;
+            --transition: .35s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            border: none;
+            background: none;
+            font: inherit;
+            cursor: pointer;
+        }
+
+        .container {
+            width: min(92%, var(--container));
+            margin: auto;
+        }
+
+        .top-bar {
+            height: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            background: #0A0A0A;
+        }
+
+        .top-bar p {
+            font-size: .85rem;
+            color: var(--text-secondary);
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            backdrop-filter: blur(18px);
+            background: rgba(5, 5, 5, .75);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header .container {
+            height: 92px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .logo-img {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        .nav {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav a,
+        .nav button {
+            position: relative;
+            font-weight: 500;
+            font-size: .95rem;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            background: none;
+        }
+
+        .nav a:hover,
+        .nav button:hover {
+            color: var(--primary);
+        }
+
+        .nav a::after,
+        .nav button::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav a:hover::after,
+        .nav button:hover::after {
+            width: 100%;
+        }
+
+        .nav button.active {
+            color: var(--primary);
+        }
+
+        .nav button.active::after {
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cart-button {
+            position: relative;
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .cart-button:hover {
+            color: var(--primary);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #000;
+            font-size: .75rem;
+            font-weight: 700;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid var(--bg);
+        }
+
+        .btn-primary {
+            padding: 14px 26px;
+            border-radius: 999px;
+            background: var(--primary);
+            color: #000;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(56, 189, 248, .35);
+        }
+
+        .hero {
+            padding: 80px 0 60px;
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 80px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 18px;
+            border: 1px solid rgba(56, 189, 248, .25);
+            border-radius: 999px;
+            color: var(--primary);
+            font-size: .9rem;
+            font-weight: 600;
+            letter-spacing: .5px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 25px;
+        }
+
+        .hero-content p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            padding: 14px 26px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .hero-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 1fr;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .hero-card {
+            border-radius: 22px;
+            overflow: hidden;
+            background: var(--surface);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .35);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .hero-card img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .hero-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .hero-left {
+            transform: scale(.9);
+        }
+
+        .hero-center {
+            transform: scale(1.1);
+            z-index: 2;
+        }
+
+        .hero-right {
+            transform: scale(.9);
+        }
+
+        .hero-left:hover {
+            transform: scale(.9) translateY(-10px);
+        }
+
+        .hero-center:hover {
+            transform: scale(1.1) translateY(-10px);
+        }
+
+        .hero-right:hover {
+            transform: scale(.9) translateY(-10px);
+        }
+
+        .section-header {
+            max-width: 700px;
+            margin: 0 auto 70px;
+            text-align: center;
+        }
+
+        .section-header span {
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            margin: 15px 0;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .colecciones {
+            padding: 60px 0 120px;
+        }
+
+        .colecciones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .collection-card {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 2/3;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .collection-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .collection-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(0, 0, 0, .92), transparent);
+        }
+
+        .collection-overlay .card-label {
+            font-family: 'Press Start 2P', monospace;
+            font-size: .6rem;
+            color: #38bdf8;
+            margin-bottom: 12px;
+            letter-spacing: .5px;
+        }
+
+        .collection-overlay h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .collection-overlay p {
+            color: #d6d6d6;
+            line-height: 1.7;
+            font-size: .9rem;
+            margin-bottom: 20px;
+        }
+
+        .collection-overlay .card-cta {
+            color: #fff;
+            font-weight: 700;
+            font-size: .95rem;
+            transition: var(--transition);
+        }
+
+        .collection-card:hover {
+            transform: translateY(-10px);
+            border-color: #38bdf8;
+            box-shadow: 0 20px 45px rgba(56, 189, 248, .18);
+        }
+
+        .collection-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .collection-card:hover .card-cta {
+            margin-left: 8px;
+        }
+
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .product-card {
+            background: var(--surface);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 35px rgba(56, 189, 248, .18);
+        }
+
+        .product-card img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            transition: .35s;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #38bdf8;
+            margin-bottom: 10px;
+        }
+
+        .add-cart-btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            background: var(--surface-light);
+            color: var(--text);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .add-cart-btn:hover {
+            background: var(--primary);
+            color: #000;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 40px;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            color: var(--primary);
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: .9rem;
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb button {
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .breadcrumb button:hover {
+            color: var(--primary);
+        }
+
+        .breadcrumb .current {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .footer {
+            margin-top: 120px;
+            padding: 70px 0 30px;
+            background: #0d0d0d;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 50px;
+        }
+
+        .footer-logo {
+            width: 60px;
+            margin-bottom: 18px;
+        }
+
+        .footer-col h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .footer a {
+            display: block;
+            margin-bottom: 12px;
+            color: #cfcfcf;
+            transition: var(--transition);
+        }
+
+        .footer a:hover {
+            color: var(--primary);
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+            color: #cfcfcf;
+        }
+
+        .footer-copy {
+            margin-top: 60px;
+            padding-top: 25px;
+            text-align: center;
+            color: #777;
+            border-top: 1px solid var(--border);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .cat-card {
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            background: #18181b;
+            border: 1px solid rgba(255, 255, 255, .08);
+            transition: all .35s ease;
+            cursor: pointer;
+            height: 340px;
+        }
+
+        .cat-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: .35s;
+        }
+
+        .cat-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px;
+            background: linear-gradient(to top, rgba(0, 0, 0, .9), rgba(0, 0, 0, .15));
+        }
+
+        .cat-overlay h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .cat-overlay p {
+            color: #a1a1aa;
+            font-size: .85rem;
+            margin-bottom: 14px;
+            line-height: 1.5;
+        }
+
+        .cat-overlay span {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: .9rem;
+            transition: .35s;
+        }
+
+        .cat-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(56, 189, 248, .18);
+        }
+
+        .cat-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .cat-card:hover .cat-overlay span {
+            margin-left: 8px;
+        }
+
+        .cat-card.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        @media (max-width: 900px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                justify-items: center;
+                text-align: center;
+            }
+
+            .hero-gallery {
+                display: none;
+            }
+
+            .hero-content p {
+                margin: 0 auto 40px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.6rem;
+            }
+
+            .header .container {
+                height: auto;
+                padding: 16px 0;
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+
+            .nav {
+                gap: 16px;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .colecciones-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .productos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar">
+        <p>✨ Diseños premium • Calidad garantizada • Envíos disponibles</p>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <div class="logo" onclick="goHome()">
+                <img src="https://placehold.co/42x42/1a1a2e/38bdf8?text=SF" alt="SquirrelFrames" class="logo-img">
+                <span class="logo-text">Squirrel<span>Frames</span></span>
+            </div>
+            <nav class="nav" id="nav-categorias"></nav>
+            <div class="header-actions">
+                <a href="carrito.html" class="cart-button" title="Carrito">🛒<span class="cart-count"
+                        id="cart-counter">0</span></a>
+                <a href="#colecciones" class="btn-primary">Comprar</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <span class="hero-tag">NUEVA COLECCIÓN</span>
+                    <h1>Tu diseño favorito,<br>en el cuadro perfecto.</h1>
+                    <p>Descubre cuadros y pósters premium inspirados en anime, videojuegos, deportes y cultura pop.</p>
+                    <div class="hero-buttons">
+                        <a href="#colecciones" class="btn-primary">Comprar ahora</a>
+                        <a href="#" class="btn-secondary">Personalizar</a>
+                    </div>
+                </div>
+                <div class="hero-gallery" id="hero-gallery">
+                    <div class="hero-card hero-left"><img id="heroImg1" src="" alt="Serie"></div>
+                    <div class="hero-card hero-center"><img id="heroImg2" src="" alt="Serie"></div>
+                    <div class="hero-card hero-right"><img id="heroImg3" src="" alt="Serie"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORÍAS -->
+        <section class="bg-zinc-950 py-20 md:py-28">
+            <div class="container">
+                <div class="text-center mb-14">
+                    <span class="text-brand-500 font-semibold tracking-[1px] text-sm uppercase">Categorías</span>
+                    <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-4">Explora por categorías</h2>
+                    <p class="text-zinc-400 max-w-xl mx-auto leading-relaxed">Encuentra fácilmente el diseño perfecto
+                        para ti.</p>
+                </div>
+                <div id="categorias-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+            </div>
+        </section>
+
+        <div id="view-home">
+            <section class="colecciones" id="colecciones">
+                <div class="container">
+                    <div class="section-header">
+                        <span>Colecciones</span>
+                        <h2 id="titulo-colecciones">Colecciones destacadas</h2>
+                        <p>Explora nuestras sagas más populares y encuentra tu diseño favorito.</p>
+                    </div>
+                    <div id="series-grid" class="colecciones-grid"></div>
+                </div>
+            </section>
+        </div>
+
+        <div id="view-productos" class="hidden">
+            <section class="colecciones">
+                <div class="container">
+                    <button onclick="goHome()" class="back-btn">← Volver a colecciones</button>
+                    <div class="breadcrumb">
+                        <button onclick="goHome()">Colecciones</button>
+                        <span>/</span>
+                        <span class="current" id="prod-serie-name">Serie</span>
+                    </div>
+                    <div id="productos-grid" class="productos-grid"></div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <img src="https://placehold.co/60x60/1a1a2e/38bdf8?text=SF" alt="SquirrelFrames" class="footer-logo">
+                <h2>SquirrelFrames</h2>
+                <p class="footer-text">Cuadros y pósters premium inspirados en anime, videojuegos, deportes y cultura
+                    pop.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Enlaces</h3>
+                <a href="#">Inicio</a>
+                <a href="#colecciones">Colecciones</a>
+                <a href="#">Personalizar</a>
+                <a href="admin.html">Admin</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contacto</h3>
+                <p>📱 WhatsApp</p>
+                <a href="#">+57 300 000 0000</a>
+                <a href="#">Instagram</a>
+                <a href="#">TikTok</a>
+            </div>
+            <div class="footer-col">
+                <h3>Métodos de pago</h3>
+                <p>💲 Binance</p>
+                <p>🟢 Nequi</p>
+                <p>📲 Pago Móvil</p>
+            </div>
+        </div>
+        <div class="container footer-copy">© 2026 SquirrelFrames • Todos los derechos reservados.</div>
+    </footer>
+
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+        let allCategorias = [], allSeries = [], allProductos = [];
+        const viewHome = document.getElementById('view-home');
+        const viewProd = document.getElementById('view-productos');
+        const seriesGrid = document.getElementById('series-grid');
+        const prodGrid = document.getElementById('productos-grid');
+        const catGrid = document.getElementById('categorias-grid');
+        const navCat = document.getElementById('nav-categorias');
+        const heroImgs = ['heroImg1', 'heroImg2', 'heroImg3'].map(id => document.getElementById(id));
+        const cartCounter = document.getElementById('cart-counter');
+
+        window.goHome = () => {
+            viewHome.classList.remove('hidden');
+            viewProd.classList.add('hidden');
+            renderSeries(allSeries);
+            document.getElementById('titulo-colecciones').textContent = 'Colecciones destacadas';
+            renderNav(null);
+            renderCategoriasCards(null);
+        };
+
+        window.filterByCategory = (catId, catName) => {
+            viewHome.classList.remove('hidden');
+            viewProd.classList.add('hidden');
+            renderSeries(allSeries.filter(s => s.Categoria_ID == catId));
+            document.getElementById('titulo-colecciones').textContent = `Colecciones de ${catName}`;
+            renderNav(catId);
+            renderCategoriasCards(catId);
+        };
+
+        window.openSerie = (serieId) => {
+            const serie = allSeries.find(s => s.ID === serieId);
+            if (!serie) return;
+            document.getElementById('prod-serie-name').textContent = serie.Nombre;
+            renderProductos(allProductos.filter(p => p.Serie_ID === serieId));
+            viewHome.classList.add('hidden');
+            viewProd.classList.remove('hidden');
+            window.scrollTo(0, 0);
+        };
+
+        function extraerNumeroPrecio(str) {
+            if (!str) return 0;
+            const match = str.replace(/[^0-9.,]/g, '').replace(',', '.');
+            const num = parseFloat(match);
+            return isNaN(num) ? 0 : num;
+        }
+
+        function actualizarContadorCarrito() {
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            const total = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+            cartCounter.textContent = total;
+        }
+
+        window.addToCart = (btn, ev) => {
+            if (ev) ev.stopPropagation();
+            const card = btn.closest('.product-card');
+            if (!card) return;
+
+            const id = parseInt(card.dataset.id);
+            const titulo = card.querySelector('h3').textContent;
+            const img = card.querySelector('img').src;
+            const precioTexto = card.querySelector('.product-price')?.textContent || '';
+            const precioBase = extraerNumeroPrecio(precioTexto);
+
+            const item = {
+                id: id,
+                titulo: titulo,
+                imagen: img,
+                precioFinal: precioBase,
+                cantidad: 1,
+                opciones: { tamaño: 'Carta', marco: 'Solo Lámina' }
+            };
+
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+            const existente = carrito.findIndex(i =>
+                i.id === item.id &&
+                i.opciones.tamaño === item.opciones.tamaño &&
+                i.opciones.marco === item.opciones.marco
+            );
+
+            if (existente > -1) {
+                carrito[existente].cantidad += 1;
+            } else {
+                carrito.push(item);
+            }
+
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            actualizarContadorCarrito();
+
+            btn.textContent = '✓ Agregado';
+            btn.style.background = '#22c55e';
+            btn.style.color = '#000';
+            setTimeout(() => {
+                btn.textContent = 'Añadir al carrito';
+                btn.style.background = '';
+                btn.style.color = '';
+            }, 1000);
+        };
+
+        function renderNav(activeCatId) {
+            let html = '<button onclick="goHome()" class="' + (!activeCatId ? 'active' : '') + '">Todo</button>';
+            allCategorias.forEach(cat => {
+                html += '<button onclick="filterByCategory(' + cat.ID + ',\'' + cat.Nombre + '\')" class="' + (activeCatId == cat.ID ? 'active' : '') + '">' + cat.Nombre + '</button>';
+            });
+            navCat.innerHTML = html;
+        }
+
+        function renderCategoriasCards(activeCatId) {
+            if (!catGrid) return;
+            catGrid.innerHTML = '';
+            if (!allCategorias.length) return;
+            allCategorias.forEach(cat => {
+                const count = allSeries.filter(s => s.Categoria_ID === cat.ID).length;
+                catGrid.innerHTML +=
+                    '<a href="colecciones.html?categoria_id=' + cat.ID + '" class="cat-card block">' +
+                    '<img src="' + (cat.URL_Imagen || 'https://placehold.co/600x800/1a1a2e/38bdf8?text=' + cat.Nombre) + '" onerror="this.src=\'https://placehold.co/600x800/1a1a2e/38bdf8?text=' + cat.Nombre + '\'" alt="' + cat.Nombre + '">' +
+                    '<div class="cat-overlay">' +
+                    '<h3>' + cat.Nombre + '</h3>' +
+                    '<p>' + count + ' colecciones disponibles</p>' +
+                    '<span>Explorar →</span>' +
+                    '</div>' +
+                    '</a>';
+            });
+        }
+
+        function renderSeries(list) {
+            seriesGrid.innerHTML = '';
+            if (!list.length) {
+                seriesGrid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text-secondary);padding:60px 0">No hay colecciones disponibles aún.</p>';
+                return;
+            }
+            list.forEach(s => {
+                const count = allProductos.filter(p => p.Serie_ID === s.ID).length;
+                const label = s.Etiqueta || (count + ' diseños');
+                const cta = 'Explorar →';
+                seriesGrid.innerHTML +=
+                    '<div onclick="openSerie(' + s.ID + ')" class="collection-card">' +
+                    '<img src="' + (s.URL_Imagen || 'https://placehold.co/600x800/1a1a2e/38bdf8?text=' + s.Nombre) + '" onerror="this.src=\'https://placehold.co/600x800/1a1a2e/38bdf8?text=' + s.Nombre + '\'" alt="' + s.Nombre + '">' +
+                    '<div class="collection-overlay">' +
+                    '<span class="card-label">' + label + '</span>' +
+                    '<h3>' + s.Nombre + '</h3>' +
+                    '<p>' + (s.Descripcion || '') + '</p>' +
+                    '<span class="card-cta">' + cta + '</span>' +
+                    '</div>' +
+                    '</div>';
+            });
+        }
+
+        function renderProductos(list) {
+            prodGrid.innerHTML = '';
+            if (!list.length) {
+                prodGrid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text-secondary);padding:60px 0">No hay diseños en esta colección aún.</p>';
+                return;
+            }
+            list.forEach(p => {
+                prodGrid.innerHTML +=
+                    '<div class="product-card" data-id="' + p.ID + '" onclick="location.href=\'detalle.html?id=' + p.ID + '\'">' +
+                    '<img src="' + p.URL_Imagen + '" onerror="this.src=\'https://placehold.co/600x800/1a1a2e/38bdf8?text=Error\'" alt="' + p.Nombre + '">' +
+                    '<div class="product-info">' +
+                    '<h3>' + p.Nombre + '</h3>' +
+                    (p.Precio ? '<p class="product-price">' + p.Precio + '</p>' : '') +
+                    '<button class="add-cart-btn" onclick="addToCart(this, event)">Añadir al carrito</button>' +
+                    '</div>' +
+                    '</div>';
+            });
+        }
+
+        function setHeroImages(series) {
+            const top3 = series.slice(0, 3);
+            heroImgs.forEach((img, i) => {
+                if (top3[i]) {
+                    img.src = top3[i].URL_Imagen || 'https://placehold.co/600x800/1a1a2e/38bdf8?text=SF';
+                    img.parentElement.onclick = () => openSerie(top3[i].ID);
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const [rCat, rSer, rProd] = await Promise.all([
+                    fetch(API_URL + '/categorias'),
+                    fetch(API_URL + '/series'),
+                    fetch(API_URL + '/productos')
+                ]);
+                if (rCat.ok) allCategorias = await rCat.json();
+                if (rSer.ok) allSeries = await rSer.json();
+                if (rProd.ok) allProductos = await rProd.json();
+                renderNav(null);
+                renderCategoriasCards(null);
+                renderSeries(allSeries);
+                setHeroImages(allSeries);
+                actualizarContadorCarrito();
+            } catch (e) {
+                console.error('Error al cargar datos:', e);
+            }
+        });
+    </script>
+</body>
+
+</html>

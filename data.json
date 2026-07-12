@@ -1,0 +1,77 @@
+{
+  "categorias": [
+    {
+      "ID": 7,
+      "Nombre": "Cuadros",
+      "URL_Imagen": ""
+    },
+    {
+      "ID": 6,
+      "Nombre": "Peliculas",
+      "URL_Imagen": ""
+    },
+    {
+      "ID": 4,
+      "Nombre": "Diseños Personalizados",
+      "URL_Imagen": null
+    },
+    {
+      "ID": 3,
+      "Nombre": "Deportes",
+      "URL_Imagen": "https://i.ibb.co/Rkx3tMWd/Whats-App-Image-2026-06-22-at-5-59-42-PM.jpg"
+    },
+    {
+      "ID": 2,
+      "Nombre": "anime",
+      "URL_Imagen": "https://placehold.co/400x600/1a1a2e/ffffff?text=Anime"
+    }
+  ],
+  "series": [
+    {
+      "ID": 3,
+      "Nombre": "Futbol",
+      "Descripcion": "jugadores",
+      "URL_Imagen": "https://i.ibb.co/GvVBgFPL/M-E-S-S-I.png",
+      "Categoria_ID": 3,
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 2,
+      "Nombre": "Berserk",
+      "Descripcion": "La lucha eterna del Espadachín Negro. Sumérgete en la obra maestra del dark fantasy y enfrenta al destino con nuestros diseños exclusivos.",
+      "URL_Imagen": "https://i.ibb.co/xZ4rfyZ/Whats-App-Image-2026-05-29-at-12-26-08-PM-1.jpg",
+      "Categoria_ID": 2,
+      "Categoria_Nombre": "anime"
+    },
+    {
+      "ID": 1,
+      "Nombre": "one piece",
+      "Descripcion": "guerrero",
+      "URL_Imagen": "https://i.ibb.co/tw04tXZN/luffy-tipo-carta.png",
+      "Categoria_ID": 2,
+      "Categoria_Nombre": "anime"
+    }
+  ],
+  "productos": [
+    {
+      "ID": 2,
+      "Nombre": "Messi",
+      "URL_Imagen": "https://i.ibb.co/GQK5S6GZ/Whats-App-Image-2026-06-22-at-5-46-35-PM-1.jpg",
+      "Serie_ID": 3,
+      "Categoria_ID": 3,
+      "Precio": "15$",
+      "Serie_Nombre": "Futbol",
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 1,
+      "Nombre": "luffy",
+      "URL_Imagen": "https://i.ibb.co/tw04tXZN/luffy-tipo-carta.png",
+      "Serie_ID": 1,
+      "Categoria_ID": 2,
+      "Precio": null,
+      "Serie_Nombre": "one piece",
+      "Categoria_Nombre": "anime"
+    }
+  ]
+}
