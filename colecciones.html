@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Colecciones | Squirrel Frames</title>
+    <title>Poster&Poster</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -15,63 +15,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilos-compartidos.css">
     <style>
-        :root {
-            --bg: #FFFFFF;
-            --surface: #F5F2ED;
-            --surface-light: #EDE8E0;
-            --primary: #2D3D33;
-            --text: #2D3D33;
-            --text-secondary: #000000;
-            --border: rgba(163, 131, 109, .15);
-            --container: 1400px;
-            --transition: .35s ease;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { background: var(--bg); color: var(--text); font-family: 'Poppins', sans-serif; overflow-x: hidden; }
-        .top-bar { height: 36px; display: flex; justify-content: center; align-items: center; border-bottom: 1px solid var(--border); background: #2D3D33; }
-        .top-bar p { font-size: .85rem; color: var(--text-secondary); }
-        img { display: block; width: 100%; }
-        a { color: inherit; text-decoration: none; }
-        button { border: none; background: none; font: inherit; cursor: pointer; }
-        .container { width: min(92%, var(--container)); margin: auto; }
-
-        .header {
-            position: sticky; top: 0; z-index: 999; backdrop-filter: blur(18px);
-            background: rgba(255, 255, 255, .95); border-bottom: 1px solid var(--border);
-        }
-        .header .container { height: 92px; display: flex; align-items: center; justify-content: space-between; }
-        .logo { display: flex; align-items: center; gap: 12px; cursor: pointer; }
-        .logo-img { width: 42px; height: 42px; border-radius: 12px; object-fit: contain; }
-        .logo-text { font-size: 1.5rem; font-weight: 700; }
-        .logo-text span { color: var(--primary); }
-        .nav { display: flex; gap: 32px; flex-wrap: wrap; justify-content: center; }
-        .nav a, .nav button {
-            position: relative; font-weight: 500; font-size: .95rem;
-            color: var(--text-secondary); transition: var(--transition); background: none;
-        }
-        .nav a:hover, .nav button:hover { color: var(--primary); }
-        .nav a::after, .nav button::after {
-            content: ''; position: absolute; left: 0; bottom: -8px; width: 0; height: 2px;
-            background: var(--primary); transition: var(--transition);
-        }
-        .nav a:hover::after, .nav button:hover::after { width: 100%; }
-        .header-actions { display: flex; align-items: center; gap: 20px; }
-        .cart-button { position: relative; font-size: 1.4rem; color: var(--text-secondary); }
-        .admin-btn { font-size: 1.2rem; color: var(--text-secondary); opacity: 0.4; transition: var(--transition); }
-        .admin-btn:hover { opacity: 1; color: var(--primary); }
-        .cart-count {
-            position: absolute; top: -8px; right: -12px; width: 22px; height: 22px; border-radius: 50%;
-            background: var(--primary); color: #F5F2ED; font-size: .75rem; font-weight: 700;
-            display: flex; justify-content: center; align-items: center; border: 2px solid var(--bg);
-        }
-        .btn-primary {
-            padding: 14px 26px; border-radius: 999px; background: var(--primary);
-            color: #F5F2ED; font-weight: 700; transition: var(--transition);
-        }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(45, 61, 51, .35); }
-
         .collection-card {
             position: relative; overflow: hidden; aspect-ratio: 2/3; border-radius: 24px;
             border: 1px solid var(--border); background: var(--surface);
@@ -93,29 +38,6 @@
         .collection-card:hover { transform: translateY(-10px); border-color: #2D3D33; box-shadow: 0 20px 45px rgba(45, 61, 51, .18); }
         .collection-card:hover img { transform: scale(1.08); }
         .collection-card:hover .card-cta { margin-left: 8px; }
-
-        .breadcrumb { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); font-size: .9rem; margin-bottom: 30px; }
-        .breadcrumb a { color: var(--text-secondary); transition: var(--transition); }
-        .breadcrumb a:hover { color: var(--primary); }
-        .breadcrumb .current { color: var(--text); font-weight: 600; }
-        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--text-secondary); font-weight: 500; margin-bottom: 40px; transition: var(--transition); }
-        .back-btn:hover { color: var(--primary); }
-
-        .footer { margin-top: 120px; padding: 70px 0 30px; background: #2D3D33; border-top: 1px solid var(--border); }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 50px; }
-        .footer-logo { width: 60px; margin-bottom: 18px; }
-        .footer-col h2 { font-size: 1.5rem; margin-bottom: 15px; }
-        .footer-col h3 { font-size: 1.1rem; margin-bottom: 20px; }
-        .footer-text { color: var(--text-secondary); line-height: 1.7; }
-        .footer a { display: block; margin-bottom: 12px; color: #E8E0D6; transition: var(--transition); }
-        .footer a:hover { color: var(--primary); }
-        .footer p { margin-bottom: 10px; color: #E8E0D6; }
-        .footer-copy { margin-top: 60px; padding-top: 25px; text-align: center; color: #000000; border-top: 1px solid var(--border); }
-
-        @media (max-width: 900px) {
-            .header .container { height: auto; padding: 16px 0; flex-wrap: wrap; gap: 16px; }
-            .nav { gap: 16px; }
-        }
     </style>
 </head>
 
@@ -127,8 +49,8 @@
     <header class="header">
         <div class="container">
             <a href="index.html" class="logo">
-                <img src="https://placehold.co/42x42/2D3D33/F5F2ED?text=SF" alt="SquirrelFrames" class="logo-img">
-                <span class="logo-text">Squirrel<span>Frames</span></span>
+                <img src="https://placehold.co/42x42/2D3D33/F5F2ED?text=PP" alt="Poster&Poster" class="logo-img">
+                <span class="logo-text">Poster<span>&</span>Poster</span>
             </a>
             <nav class="nav" id="nav-categorias"></nav>
             <div class="header-actions">
@@ -158,32 +80,32 @@
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-col">
-                <img src="https://placehold.co/60x60/2D3D33/F5F2ED?text=SF" alt="SquirrelFrames" class="footer-logo">
-                <h2>SquirrelFrames</h2>
-                <p class="footer-text">Cuadros y pósters premium inspirados en anime, videojuegos, deportes y cultura pop.</p>
+                <img src="https://placehold.co/60x60/2D3D33/F5F2ED?text=PP" alt="Poster&Poster" class="footer-logo">
+                <h2>Poster&Poster</h2>
+                <p class="footer-text">Cuadros y posters premium inspirados en anime, videojuegos, deportes y cultura pop.</p>
             </div>
             <div class="footer-col">
                 <h3>Enlaces</h3>
                 <a href="index.html">Inicio</a>
                 <a href="colecciones.html">Colecciones</a>
-                <a href="#">Personalizar</a>
-                <a href="admin.html">Admin</a>
+                <a href="carrito.html">Carrito</a>
+                <div id="footer-categorias"></div>
             </div>
             <div class="footer-col">
                 <h3>Contacto</h3>
                 <p>📱 WhatsApp</p>
-                <a href="#">+57 300 000 0000</a>
+                <a href="https://wa.me/584247041639">+58 4247041639</a>
                 <a href="#">Instagram</a>
                 <a href="#">TikTok</a>
             </div>
             <div class="footer-col">
-                <h3>Métodos de pago</h3>
+                <h3>Metodos de pago</h3>
                 <p>💲 Binance</p>
-                <p>🟢 Nequi</p>
-                <p>📲 Pago Móvil</p>
+                <p>🇨🇴 Pesos colombianos</p>
+                <p>🇻🇪 Bolivares</p>
             </div>
         </div>
-        <div class="container footer-copy">© 2026 SquirrelFrames • Todos los derechos reservados.</div>
+        <div class="container footer-copy">© 2026 Poster&Poster • Todos los derechos reservados.</div>
     </footer>
 
     <script>
@@ -204,6 +126,8 @@
                 }
             } catch (e) {
                 console.error('Error al cargar datos:', e);
+                document.getElementById('series-grid').innerHTML = '<p class="text-red-500 text-center py-20 col-span-full">Error al cargar datos.</p>';
+                return;
             }
 
             // Nav
@@ -222,12 +146,26 @@
                 const cat = allCategorias.find(c => c.ID == catId);
                 if (cat) {
                     filtered = allSeries.filter(s => s.Categoria_ID == catId);
+                    const sinC = allSeries.find(s => s.Nombre === 'Sin Coleccion');
+                    if (sinC && allProductos.some(p => p.Serie_ID === sinC.ID && p.Categoria_ID == catId)) {
+                        filtered.push(sinC);
+                    }
                     title = 'Colecciones de ' + cat.Nombre;
                     breadcrumbText = cat.Nombre;
                 }
             }
+            if (!catId) {
+                filtered = filtered.filter(s => s.Nombre !== 'Sin Coleccion');
+            }
             document.getElementById('page-title').textContent = title;
             document.getElementById('breadcrumb-current').textContent = breadcrumbText;
+
+            const footerCat = document.getElementById('footer-categorias');
+            if (footerCat && allCategorias.length) {
+                allCategorias.forEach(c => {
+                    footerCat.innerHTML += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + c.Nombre + '</a>';
+                });
+            }
 
             // Render
             const grid = document.getElementById('series-grid');
@@ -235,12 +173,30 @@
                 grid.innerHTML = '<p class="text-zinc-500 text-center py-20 col-span-full">No hay colecciones disponibles aún.</p>';
             } else {
                 filtered.forEach(s => {
-                    const count = allProductos.filter(p => p.Serie_ID === s.ID).length;
+                    let count;
+                    if (s.Nombre === 'Sin Coleccion' && catId) {
+                        count = allProductos.filter(p => p.Serie_ID === s.ID && p.Categoria_ID == catId).length;
+                    } else {
+                        count = allProductos.filter(p => p.Serie_ID === s.ID).length;
+                    }
                     const label = s.Etiqueta || (count + ' diseños');
-                    const cta = 'Explorar →';
+                    const cta = s.CTA_Texto || 'Explorar →';
+                    let link = 'productos.html?serie_id=' + s.ID;
+                    if (catId) link += '&categoria_id=' + catId;
+                    let imgSrc = s.URL_Imagen;
+                    if (!imgSrc) {
+                        let fp;
+                        if (catId) {
+                            fp = allProductos.find(p => p.Serie_ID === s.ID && p.Categoria_ID == catId);
+                        } else {
+                            fp = allProductos.find(p => p.Serie_ID === s.ID);
+                        }
+                        if (fp) imgSrc = fp.URL_Imagen;
+                    }
+                    if (!imgSrc) imgSrc = 'https://placehold.co/600x800/2D3D33/F5F2ED?text=' + s.Nombre;
                     grid.innerHTML +=
-                        '<a href="productos.html?serie_id=' + s.ID + '" class="collection-card">' +
-                            '<img src="' + (s.URL_Imagen || 'https://placehold.co/600x800/2D3D33/F5F2ED?text=' + s.Nombre) + '" onerror="this.src=\'https://placehold.co/600x800/2D3D33/F5F2ED?text=' + s.Nombre + '\'" alt="' + s.Nombre + '">' +
+                        '<a href="' + link + '" class="collection-card">' +
+                            '<img src="' + imgSrc + '" loading="lazy" onerror="this.src=\'https://placehold.co/600x800/2D3D33/F5F2ED?text=' + s.Nombre + '\'" alt="' + s.Nombre + '">' +
                             '<div class="collection-overlay">' +
                                 '<span class="card-label">' + label + '</span>' +
                                 '<h3>' + s.Nombre + '</h3>' +

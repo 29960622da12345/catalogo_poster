@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | Squirrel Frames</title>
+    <title>Poster&Poster</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
@@ -192,10 +192,26 @@
             transition: .3s;
         }
 
-        .btn-new:hover {
-            box-shadow: 0 8px 24px rgba(45, 61, 51, .35);
-            transform: translateY(-2px);
-        }
+    .btn-new:hover {
+        box-shadow: 0 8px 24px rgba(45, 61, 51, .35);
+        transform: translateY(-2px);
+    }
+
+    .btn-export {
+        padding: 12px 28px;
+        border-radius: 999px;
+        background: transparent;
+        color: #2D3D33;
+        font-weight: 600;
+        font-size: 14px;
+        border: 1px solid #2D3D33;
+        cursor: pointer;
+        transition: .3s;
+    }
+    .btn-export:hover {
+        background: rgba(45, 61, 51, .1);
+        transform: translateY(-2px);
+    }
 
         /* Stats Grid */
         .stats-grid {
@@ -644,7 +660,7 @@
 
         <!-- SIDEBAR -->
         <aside class="sidebar">
-            <div class="sidebar-logo">Squirrel<span style="color:#A3836D;">Frames</span></div>
+            <div class="sidebar-logo">Poster<span style="color:#A3836D;">&</span>Poster</div>
             <nav class="sidebar-nav">
                 <button class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')">
                     <i class="fas fa-chart-simple"></i> Dashboard
@@ -673,7 +689,10 @@
             <!-- HEADER -->
             <div class="main-header">
                 <h1>Dashboard</h1>
-                <button class="btn-new" onclick="openModal('personaje')">+ Nuevo personaje</button>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                    <button class="btn-export" onclick="exportarData()">📦 Exportar data.json</button>
+                    <button class="btn-new" onclick="openModal('personaje')">+ Nuevo personaje</button>
+                </div>
             </div>
 
             <!-- STATS -->
@@ -714,7 +733,10 @@
             <div class="section" id="sec-personajes">
                 <div class="section-header">
                     <h2>Personajes</h2>
-                    <button class="btn-add" onclick="openModal('personaje')">+ Nuevo</button>
+                    <div style="display:flex;gap:8px;">
+                        <button class="btn-add" onclick="openModal('personaje')">+ Nuevo</button>
+                        <button class="btn-add" id="btn-filter-sincoleccion" onclick="toggleSinColeccionFilter()" style="background:var(--surface-light);color:var(--text)"> Sin coleccion</button>
+                    </div>
                 </div>
                 <div id="personajes-grid" class="card-grid"></div>
             </div>
@@ -724,7 +746,7 @@
                 <div class="section-header">
                     <h2>Configuración</h2>
                 </div>
-                <p style="color:#888;">Panel de administración de SquirrelFrames.</p>
+                <p style="color:#888;">Panel de administración de Poster&Poster.</p>
             </div>
 
         </main>
@@ -738,7 +760,11 @@
             <label>Nombre</label>
             <input type="text" id="cat-nombre" placeholder="Ej. Anime">
             <label>URL de Imagen</label>
-            <input type="text" id="cat-url" placeholder="https://...">
+            <div style="display:flex;gap:8px;">
+                <input type="text" id="cat-url" placeholder="https://..." style="flex:1;">
+                <input type="file" accept="image/*" onchange="subirImagen(this, 'cat-url')" style="display:none;" id="file-cat">
+                <button class="btn-add" onclick="document.getElementById('file-cat').click()" type="button" style="padding:10px 16px;">📁</button>
+            </div>
             <div class="modal-btns">
                 <button class="btn-cancel" onclick="closeModal('categoria')">Cancelar</button>
                 <button class="btn-save" onclick="saveCategoria()">Guardar</button>
@@ -756,7 +782,13 @@
             <label>Descripción</label>
             <textarea id="col-desc" placeholder="Descripción de la colección..."></textarea>
             <label>URL de Imagen</label>
-            <input type="text" id="col-url" placeholder="https://...">
+            <div style="display:flex;gap:8px;">
+                <input type="text" id="col-url" placeholder="https://..." style="flex:1;">
+                <input type="file" accept="image/*" onchange="subirImagen(this, 'col-url')" style="display:none;" id="file-col">
+                <button class="btn-add" onclick="document.getElementById('file-col').click()" type="button" style="padding:10px 16px;">📁</button>
+            </div>
+            <label>Precio (se hereda a productos)</label>
+            <input type="text" id="col-precio" placeholder="Ej. 15$">
             <label>Categoría</label>
             <select id="col-cat"></select>
             <div class="modal-btns">
@@ -774,7 +806,11 @@
             <label>Nombre</label>
             <input type="text" id="pers-nombre" placeholder="Ej. Goku Ultra Instinct">
             <label>URL de Imagen</label>
-            <input type="text" id="pers-url" placeholder="https://...">
+            <div style="display:flex;gap:8px;">
+                <input type="text" id="pers-url" placeholder="https://..." style="flex:1;">
+                <input type="file" accept="image/*" onchange="subirImagen(this, 'pers-url')" style="display:none;" id="file-pers">
+                <button class="btn-add" onclick="document.getElementById('file-pers').click()" type="button" style="padding:10px 16px;">📁</button>
+            </div>
             <label>Precio</label>
             <input type="text" id="pers-precio" placeholder="Ej. $15.00, 10 USD, Consultar...">
             <label>Asignar a Categoría (opcional)</label>
@@ -793,9 +829,20 @@
     </div>
 
     <script>
-        const API = 'http://localhost:5000/api';
+        const API = '/api';
         let allCategorias = [], allColecciones = [], allPersonajes = [];
         let currentTab = 'dashboard';
+        let showOnlySinColeccion = false;
+
+        function toggleSinColeccionFilter() {
+            showOnlySinColeccion = !showOnlySinColeccion;
+            const btn = document.getElementById('btn-filter-sincoleccion');
+            if (btn) {
+                btn.style.background = showOnlySinColeccion ? 'var(--primary)' : 'var(--surface-light)';
+                btn.style.color = showOnlySinColeccion ? '#F5F2ED' : 'var(--text)';
+            }
+            renderPersonajes();
+        }
 
         // ===== AUTH =====
         function checkAuth() {
@@ -860,6 +907,40 @@
             document.getElementById('modal-' + type).classList.remove('show');
         }
 
+        // ===== EXPORTAR DATA.JSON =====
+        async function exportarData() {
+            try {
+                const r = await fetch(API + '/exportar', { method: 'POST' });
+                const d = await r.json();
+                if (d.success) {
+                    alert('✅ ' + d.message);
+                } else {
+                    alert('❌ ' + d.message);
+                }
+            } catch (e) {
+                alert('❌ Error al conectar con la API');
+            }
+        }
+
+        // ===== SUBIR IMAGEN =====
+        async function subirImagen(fileInput, inputId) {
+            const file = fileInput.files[0];
+            if (!file) return;
+            const form = new FormData();
+            form.append('imagen', file);
+            try {
+                const r = await fetch(API + '/subir-imagen', { method: 'POST', body: form });
+                const d = await r.json();
+                if (d.success) {
+                    document.getElementById(inputId).value = d.url;
+                } else {
+                    alert('Error: ' + d.message);
+                }
+            } catch (e) {
+                alert('Error al subir imagen');
+            }
+        }
+
         // ===== CARGA =====
         async function loadAll() {
             const [rC, rS, rP] = await Promise.all([
@@ -887,7 +968,7 @@
             allCategorias.forEach(c => {
                 g.innerHTML +=
                     '<div class="admin-card">' +
-                    '<img src="' + (c.URL_Imagen || 'https://placehold.co/400x600/2D3D33/F5F2ED?text=' + c.Nombre) + '" class="card-img" onerror="this.src=\'https://placehold.co/400x600/2D3D33/F5F2ED?text=' + c.Nombre + '\'">' +
+                    '<img src="' + (c.URL_Imagen || 'https://placehold.co/400x600/2D3D33/F5F2ED?text=' + c.Nombre) + '" class="card-img" loading="lazy" onerror="this.src=\'https://placehold.co/400x600/2D3D33/F5F2ED?text=' + c.Nombre + '\'">' +
                     '<div class="card-body"><h4>' + c.Nombre + '</h4><p>' + (allColecciones.filter(s => s.Categoria_ID === c.ID).length) + ' colecciones</p></div>' +
                     '<div class="card-actions">' +
                     '<button class="btn-edit" onclick="editCategoria(' + c.ID + ',\'' + c.Nombre.replace(/'/g, "\\'") + '\',\'' + (c.URL_Imagen || '').replace(/'/g, "\\'") + '\')"><i class="fas fa-pen"></i></button>' +
@@ -947,11 +1028,12 @@
                 const cat = allCategorias.find(c => c.ID === s.Categoria_ID);
                 g.innerHTML +=
                     '<div class="admin-card">' +
-                    '<img src="' + (s.URL_Imagen || 'https://placehold.co/400x600/2D3D33/F5F2ED?text=' + s.Nombre) + '" class="card-img" onerror="this.src=\'https://placehold.co/400x600/2D3D33/F5F2ED?text=' + s.Nombre + '\'">' +
+                    '<img src="' + (s.URL_Imagen || 'https://placehold.co/400x600/2D3D33/F5F2ED?text=' + s.Nombre) + '" class="card-img" loading="lazy" onerror="this.src=\'https://placehold.co/400x600/2D3D33/F5F2ED?text=' + s.Nombre + '\'">' +
                     '<div class="card-body"><h4>' + s.Nombre + '</h4><p>' + (cat ? cat.Nombre : 'Sin categoría') + ' · ' + (allPersonajes.filter(p => p.Serie_ID === s.ID).length) + ' personajes</p></div>' +
                     '<div class="card-actions">' +
-                    '<button class="btn-edit" onclick="editColeccion(' + s.ID + ',\'' + s.Nombre.replace(/'/g, "\\'") + '\',\'' + (s.Descripcion || '').replace(/'/g, "\\'") + '\',\'' + (s.URL_Imagen || '').replace(/'/g, "\\'") + '\',' + s.Categoria_ID + ')"><i class="fas fa-pen"></i></button>' +
+                    '<button class="btn-edit" onclick="editColeccion(' + s.ID + ',\'' + s.Nombre.replace(/'/g, "\\'") + '\',\'' + (s.Descripcion || '').replace(/'/g, "\\'") + '\',\'' + (s.URL_Imagen || '').replace(/'/g, "\\'") + '\',\'' + (s.Precio || '').replace(/'/g, "\\'") + '\',' + s.Categoria_ID + ')"><i class="fas fa-pen"></i></button>' +
                     '<button class="btn-del" onclick="deleteColeccion(' + s.ID + ')"><i class="fas fa-trash"></i></button>' +
+                    '<button class="btn-add" onclick="syncPrecios(' + s.ID + ')" title="Aplicar precio a productos" style="padding:8px 10px;font-size:.8rem;">💰 Sincronizar</button>' +
                     '</div>' +
                     '</div>';
             });
@@ -970,12 +1052,19 @@
             const nombre = document.getElementById('col-nombre').value;
             const descripcion = document.getElementById('col-desc').value;
             const url_imagen = document.getElementById('col-url').value;
+            const precio = document.getElementById('col-precio').value;
             const categoria_id = document.getElementById('col-cat').value;
             if (!nombre || !categoria_id) return alert('Nombre y categoría requeridos');
             const r = await fetch(id ? API + '/series/' + id : API + '/series', {
                 method: id ? 'PUT' : 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ nombre, descripcion, url_imagen, categoria_id })
+                body: JSON.stringify({
+                    nombre,
+                    descripcion,
+                    url_imagen,
+                    precio,
+                    categoria_id
+                })
             });
             const d = await r.json();
             if (!d.success) return alert(d.message);
@@ -984,17 +1073,19 @@
             document.getElementById('col-nombre').value = '';
             document.getElementById('col-desc').value = '';
             document.getElementById('col-url').value = '';
+            document.getElementById('col-precio').value = '';
             const res = await fetch(API + '/series');
             if (res.ok) allColecciones = await res.json();
             updateStats();
             renderColecciones();
         }
 
-        function editColeccion(id, nombre, desc, url, cat_id) {
+        function editColeccion(id, nombre, desc, url, precio, cat_id) {
             document.getElementById('col-id').value = id;
             document.getElementById('col-nombre').value = nombre;
             document.getElementById('col-desc').value = desc;
             document.getElementById('col-url').value = url;
+            document.getElementById('col-precio').value = precio || '';
             populateCatSelect('col-cat', cat_id);
             document.getElementById('modal-col-title').textContent = 'Editar Colección';
             openModal('coleccion');
@@ -1010,18 +1101,38 @@
             renderColecciones();
         }
 
+        async function syncPrecios(id) {
+            if (!confirm('¿Aplicar el precio de esta colección a todos sus productos?')) return;
+            const r = await fetch(API + '/series/' + id + '/sincronizar-precios', { method: 'POST' });
+            const d = await r.json();
+            alert(d.message);
+            if (d.success) {
+                const [rS, rP] = await Promise.all([fetch(API + '/series'), fetch(API + '/productos')]);
+                if (rS.ok) allColecciones = await rS.json();
+                if (rP.ok) allPersonajes = await rP.json();
+                updateStats();
+                renderColecciones();
+                renderPersonajes();
+            }
+        }
+
         // ===== PERSONAJES =====
         function renderPersonajes() {
             const g = document.getElementById('personajes-grid');
             g.innerHTML = '';
-            if (!allPersonajes.length) { g.innerHTML = '<p class="no-data" style="color:#888;grid-column:1/-1;padding:40px 0">Sin personajes</p>'; return; }
-            allPersonajes.forEach(p => {
+            const sinC = allColecciones.find(s => s.Nombre === 'Sin Coleccion');
+            let list = allPersonajes;
+            if (showOnlySinColeccion && sinC) {
+                list = allPersonajes.filter(p => p.Serie_ID === sinC.ID);
+            }
+            if (!list.length) { g.innerHTML = '<p class="no-data" style="color:#888;grid-column:1/-1;padding:40px 0">' + (showOnlySinColeccion ? 'No hay personajes sin colecci&oacute;n' : 'Sin personajes') + '</p>'; return; }
+            list.forEach(p => {
                 const col = allColecciones.find(s => s.ID === p.Serie_ID);
                 const cat = allCategorias.find(c => c.ID === p.Categoria_ID);
                 let parent = col ? col.Nombre : (cat ? cat.Nombre : '');
                 g.innerHTML +=
                     '<div class="admin-card">' +
-                    '<img src="' + p.URL_Imagen + '" class="card-img" onerror="this.src=\'https://placehold.co/400x600/2D3D33/F5F2ED?text=Error\'">' +
+                    '<img src="' + p.URL_Imagen + '" class="card-img" loading="lazy" onerror="this.src=\'https://placehold.co/400x600/2D3D33/F5F2ED?text=Error\'">' +
                     '<div class="card-body"><h4>' + p.Nombre + '</h4><p>' + (parent || 'Sin asignar') + (p.Precio ? ' · ' + p.Precio : '') + '</p></div>' +
                     '<div class="card-actions">' +
                     '<button class="btn-edit" onclick="editPersonaje(' + p.ID + ',\'' + p.Nombre.replace(/'/g, "\\'") + '\',\'' + (p.URL_Imagen || '').replace(/'/g, "\\'") + '\',' + (p.Categoria_ID || 'null') + ',' + (p.Serie_ID || 'null') + ')"><i class="fas fa-pen"></i></button>' +
@@ -1121,6 +1232,7 @@
                 document.getElementById('col-nombre').value = '';
                 document.getElementById('col-desc').value = '';
                 document.getElementById('col-url').value = '';
+                document.getElementById('col-precio').value = '';
                 populateCatSelect('col-cat');
             }
         });

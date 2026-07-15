@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Squirrel Frames | Tu diseño favorito, en el cuadro perfecto</title>
+    <title>Poster&Poster</title>
     <meta name="description"
         content="Descubre pósters y cuadros premium inspirados en cultura pop, videojuegos y deportes.">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,218 +19,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Press+Start+2P&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="estilos-compartidos.css">
     <style>
-        :root {
-            --bg: #FFFFFF;
-            --surface: #F5F2ED;
-            --surface-light: #EDE8E0;
-            --primary: #2D3D33;
-            --text: #2D3D33;
-            --text-secondary: #000000;
-            --border: rgba(163, 131, 109, .15);
-            --container: 1400px;
-            --radius: 18px;
-            --transition: .35s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
-        }
-
-        img {
-            display: block;
-            width: 100%;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        button {
-            border: none;
-            background: none;
-            font: inherit;
-            cursor: pointer;
-        }
-
-        .container {
-            width: min(92%, var(--container));
-            margin: auto;
-        }
-
-        .top-bar {
-            height: 36px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-            background: #2D3D33;
-        }
-
-        .top-bar p {
-            font-size: .85rem;
-            color: var(--text-secondary);
-        }
-
-        .header {
-            position: sticky;
-            top: 0;
-            z-index: 999;
-            backdrop-filter: blur(18px);
-            background: rgba(255, 255, 255, .95);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .header .container {
-            height: 92px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-        }
-
-        .logo-img {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            object-fit: contain;
-        }
-
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .logo-text span {
-            color: var(--primary);
-        }
-
-        .nav {
-            display: flex;
-            gap: 32px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .nav a,
-        .nav button {
-            position: relative;
-            font-weight: 500;
-            font-size: .95rem;
-            color: var(--text-secondary);
-            transition: var(--transition);
-            background: none;
-        }
-
-        .nav a:hover,
-        .nav button:hover {
-            color: var(--primary);
-        }
-
-        .nav a::after,
-        .nav button::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -8px;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
-        }
-
-        .nav a:hover::after,
-        .nav button:hover::after {
-            width: 100%;
-        }
-
-        .nav button.active {
-            color: var(--primary);
-        }
-
-        .nav button.active::after {
-            width: 100%;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .cart-button {
-            position: relative;
-            font-size: 1.4rem;
-            color: var(--text-secondary);
-            transition: var(--transition);
-        }
-
-        .cart-button:hover {
-            color: var(--primary);
-        }
-
-        .admin-btn {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            opacity: 0.4;
-            transition: var(--transition);
-        }
-        .admin-btn:hover {
-            opacity: 1;
-            color: var(--primary);
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            right: -12px;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: var(--primary);
-            color: #F5F2ED;
-            font-size: .75rem;
-            font-weight: 700;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 2px solid var(--bg);
-        }
-
-        .btn-primary {
-            padding: 14px 26px;
-            border-radius: 999px;
-            background: var(--primary);
-            color: #F5F2ED;
-            font-weight: 700;
-            transition: var(--transition);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(45, 61, 51, .35);
-        }
-
         .hero {
             padding: 80px 0 60px;
         }
@@ -268,24 +58,6 @@
             max-width: 600px;
         }
 
-        .hero-buttons {
-            display: flex;
-            gap: 18px;
-            flex-wrap: wrap;
-        }
-
-        .btn-secondary {
-            padding: 14px 26px;
-            border: 1px solid var(--border);
-            border-radius: 999px;
-            color: var(--text-secondary);
-            transition: var(--transition);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
 
         .hero-gallery {
             display: grid;
@@ -367,7 +139,7 @@
 
         .colecciones-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 30px;
         }
 
@@ -403,7 +175,7 @@
         .collection-overlay .card-label {
             font-family: 'Press Start 2P', monospace;
             font-size: .6rem;
-            color: #A3836D;
+            color: #F5F2ED;
             margin-bottom: 12px;
             letter-spacing: .5px;
         }
@@ -507,103 +279,6 @@
             color: #F5F2ED;
         }
 
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-secondary);
-            font-weight: 500;
-            margin-bottom: 40px;
-            transition: var(--transition);
-        }
-
-        .back-btn:hover {
-            color: var(--primary);
-        }
-
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-secondary);
-            font-size: .9rem;
-            margin-bottom: 30px;
-        }
-
-        .breadcrumb button {
-            color: var(--text-secondary);
-            transition: var(--transition);
-        }
-
-        .breadcrumb button:hover {
-            color: var(--primary);
-        }
-
-        .breadcrumb .current {
-            color: var(--text);
-            font-weight: 600;
-        }
-
-        .footer {
-            margin-top: 120px;
-            padding: 70px 0 30px;
-            background: #2D3D33;
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 50px;
-        }
-
-        .footer-logo {
-            width: 60px;
-            margin-bottom: 18px;
-        }
-
-        .footer-col h2 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        .footer-col h3 {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-        }
-
-        .footer-text {
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        .footer a {
-            display: block;
-            margin-bottom: 12px;
-            color: #E8E0D6;
-            transition: var(--transition);
-        }
-
-        .footer a:hover {
-            color: var(--primary);
-        }
-
-        .footer p {
-            margin-bottom: 10px;
-            color: #E8E0D6;
-        }
-
-        .footer-copy {
-            margin-top: 60px;
-            padding-top: 25px;
-            text-align: center;
-            color: #000000;
-            border-top: 1px solid var(--border);
-        }
-
-        .hidden {
-            display: none !important;
-        }
 
         .cat-card {
             position: relative;
@@ -634,20 +309,21 @@
         }
 
         .cat-overlay h3 {
+            color: #fff;
             font-size: 1.4rem;
             font-weight: 700;
             margin-bottom: 4px;
         }
 
         .cat-overlay p {
-            color: #a1a1aa;
+            color: #fff;
             font-size: .85rem;
             margin-bottom: 14px;
             line-height: 1.5;
         }
 
         .cat-overlay span {
-            color: var(--primary);
+            color: #fff;
             font-weight: 600;
             font-size: .9rem;
             transition: .35s;
@@ -687,23 +363,8 @@
                 margin: 0 auto 40px;
             }
 
-            .hero-buttons {
-                justify-content: center;
-            }
-
             .hero-content h1 {
                 font-size: 2.6rem;
-            }
-
-            .header .container {
-                height: auto;
-                padding: 16px 0;
-                flex-wrap: wrap;
-                gap: 16px;
-            }
-
-            .nav {
-                gap: 16px;
             }
 
             .section-header h2 {
@@ -731,14 +392,14 @@
     <header class="header">
         <div class="container">
             <div class="logo" onclick="goHome()">
-                <img src="https://placehold.co/42x42/2D3D33/F5F2ED?text=SF" alt="SquirrelFrames" class="logo-img">
-                <span class="logo-text">Squirrel<span>Frames</span></span>
+                <img src="https://placehold.co/42x42/2D3D33/F5F2ED?text=PP" alt="Poster&Poster" class="logo-img">
+                <span class="logo-text">Poster<span>&</span>Poster</span>
             </div>
             <nav class="nav" id="nav-categorias"></nav>
             <div class="header-actions">
+                <input type="text" id="search-nav-input" class="search-nav-input" placeholder="Buscar colecciones..." oninput="handleSearch()">
                 <a href="carrito.html" class="cart-button" title="Carrito">🛒<span class="cart-count"
                         id="cart-counter">0</span></a>
-                <a href="#colecciones" class="btn-primary">Comprar</a>
                 <a href="admin.html" class="admin-btn" title="Admin">🔧</a>
             </div>
         </div>
@@ -751,10 +412,6 @@
                     <span class="hero-tag">NUEVA COLECCIÓN</span>
                     <h1>Tu diseño favorito,<br>en el cuadro perfecto.</h1>
                     <p>Descubre cuadros y pósters premium inspirados en anime, videojuegos, deportes y cultura pop.</p>
-                    <div class="hero-buttons">
-                        <a href="#colecciones" class="btn-primary">Comprar ahora</a>
-                        <a href="#" class="btn-secondary">Personalizar</a>
-                    </div>
                 </div>
                 <div class="hero-gallery" id="hero-gallery">
                     <div class="hero-card hero-left"><img id="heroImg1" src="" alt="Serie"></div>
@@ -808,37 +465,37 @@
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-col">
-                <img src="https://placehold.co/60x60/2D3D33/F5F2ED?text=SF" alt="SquirrelFrames" class="footer-logo">
-                <h2>SquirrelFrames</h2>
-                <p class="footer-text">Cuadros y pósters premium inspirados en anime, videojuegos, deportes y cultura
-                    pop.</p>
+                <img src="https://placehold.co/60x60/2D3D33/F5F2ED?text=PP" alt="Poster&Poster" class="footer-logo">
+                <h2>Poster&Poster</h2>
+                <p class="footer-text">Cuadros y posters premium inspirados en anime, videojuegos, deportes y cultura pop.</p>
             </div>
             <div class="footer-col">
                 <h3>Enlaces</h3>
-                <a href="#">Inicio</a>
-                <a href="#colecciones">Colecciones</a>
-                <a href="#">Personalizar</a>
-                <a href="admin.html">Admin</a>
+                <a href="index.html">Inicio</a>
+                <a href="colecciones.html">Colecciones</a>
+                <a href="carrito.html">Carrito</a>
+                <div id="footer-categorias"></div>
             </div>
             <div class="footer-col">
                 <h3>Contacto</h3>
                 <p>📱 WhatsApp</p>
-                <a href="#">+57 300 000 0000</a>
+                <a href="https://wa.me/584247041639">+58 4247041639</a>
                 <a href="#">Instagram</a>
                 <a href="#">TikTok</a>
             </div>
             <div class="footer-col">
-                <h3>Métodos de pago</h3>
+                <h3>Metodos de pago</h3>
                 <p>💲 Binance</p>
-                <p>🟢 Nequi</p>
-                <p>📲 Pago Móvil</p>
+                <p>🇨🇴 Pesos colombianos</p>
+                <p>🇻🇪 Bolivares</p>
             </div>
         </div>
-        <div class="container footer-copy">© 2026 SquirrelFrames • Todos los derechos reservados.</div>
+        <div class="container footer-copy">© 2026 Poster&Poster • Todos los derechos reservados.</div>
     </footer>
 
     <script>
         let allCategorias = [], allSeries = [], allProductos = [];
+        let activeCategoryId = null;
         const viewHome = document.getElementById('view-home');
         const viewProd = document.getElementById('view-productos');
         const seriesGrid = document.getElementById('series-grid');
@@ -847,8 +504,17 @@
         const navCat = document.getElementById('nav-categorias');
         const heroImgs = ['heroImg1', 'heroImg2', 'heroImg3'].map(id => document.getElementById(id));
         const cartCounter = document.getElementById('cart-counter');
+        const coleccionesSec = document.getElementById('colecciones');
+        const heroSection = document.querySelector('.hero');
+        const categoriasSection = document.querySelector('.bg-white.py-20');
+        const searchInput = document.getElementById('search-nav-input');
 
         window.goHome = () => {
+            activeCategoryId = null;
+            if (searchInput) searchInput.value = '';
+            if (heroSection) heroSection.classList.remove('hidden');
+            if (categoriasSection) categoriasSection.classList.remove('hidden');
+            if (coleccionesSec) coleccionesSec.classList.remove('hidden');
             viewHome.classList.remove('hidden');
             viewProd.classList.add('hidden');
             renderSeries(allSeries);
@@ -858,19 +524,78 @@
         };
 
         window.filterByCategory = (catId, catName) => {
+            activeCategoryId = catId;
             viewHome.classList.remove('hidden');
             viewProd.classList.add('hidden');
-            renderSeries(allSeries.filter(s => s.Categoria_ID == catId));
+            const sinC = allSeries.find(s => s.Nombre === 'Sin Coleccion');
+            let filtered = allSeries.filter(s => s.Categoria_ID == catId);
+            if (sinC && allProductos.some(p => p.Serie_ID === sinC.ID && p.Categoria_ID == catId)) {
+                filtered.push(sinC);
+            }
+            renderSeries(filtered);
             document.getElementById('titulo-colecciones').textContent = `Colecciones de ${catName}`;
             renderNav(catId);
             renderCategoriasCards(catId);
         };
 
+        window.handleSearch = () => {
+            const q = searchInput ? searchInput.value.trim().toLowerCase() : '';
+            if (!q) {
+                activeCategoryId = null;
+                if (heroSection) heroSection.classList.remove('hidden');
+                if (categoriasSection) categoriasSection.classList.remove('hidden');
+                viewHome.classList.remove('hidden');
+                viewProd.classList.add('hidden');
+                renderSeries(allSeries.filter(s => s.Nombre !== 'Sin Coleccion'));
+                document.getElementById('titulo-colecciones').textContent = 'Colecciones destacadas';
+                return;
+            }
+            if (heroSection) heroSection.classList.add('hidden');
+            if (categoriasSection) categoriasSection.classList.add('hidden');
+            const matchingProductos = allProductos.filter(p =>
+                p.Nombre.toLowerCase().includes(q)
+            );
+            const matchingSeries = allSeries.filter(s =>
+                s.Nombre.toLowerCase().includes(q) ||
+                (s.Descripcion && s.Descripcion.toLowerCase().includes(q))
+            );
+            viewHome.classList.remove('hidden');
+            viewProd.classList.add('hidden');
+            if (matchingProductos.length) {
+                seriesGrid.innerHTML = '';
+                matchingProductos.forEach(p => {
+                    seriesGrid.innerHTML +=
+                        '<div class="product-card" data-id="' + p.ID + '" onclick="location.href=\'detalle.html?id=' + p.ID + '\'">' +
+                        '<img src="' + p.URL_Imagen + '" onerror="this.src=\'https://placehold.co/600x800/2D3D33/F5F2ED?text=Error\'" alt="' + p.Nombre + '">' +
+                        '<div class="product-info">' +
+                        '<h3>' + p.Nombre + '</h3>' +
+                        (p.Precio ? '<p class="product-price">' + p.Precio + '</p>' : '') +
+                        '<button class="add-cart-btn" onclick="addToCart(this, event)">Anadir al carrito</button>' +
+                        '</div>' +
+                        '</div>';
+                });
+                document.getElementById('titulo-colecciones').textContent = 'Resultados para "' + q + '"';
+            } else if (matchingSeries.length) {
+                renderSeries(matchingSeries.filter(s => s.Nombre !== 'Sin Coleccion'));
+                document.getElementById('titulo-colecciones').textContent = 'Resultados para "' + q + '"';
+            } else {
+                seriesGrid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text-secondary);padding:60px 0">No se encontraron resultados para "' + q + '"</p>';
+                document.getElementById('titulo-colecciones').textContent = 'Sin resultados';
+            }
+        };
+
         window.openSerie = (serieId) => {
+            if (searchInput) searchInput.value = '';
+            if (heroSection) heroSection.classList.add('hidden');
+            if (categoriasSection) categoriasSection.classList.add('hidden');
             const serie = allSeries.find(s => s.ID === serieId);
             if (!serie) return;
             document.getElementById('prod-serie-name').textContent = serie.Nombre;
-            renderProductos(allProductos.filter(p => p.Serie_ID === serieId));
+            let prods = allProductos.filter(p => p.Serie_ID === serieId);
+            if (serie.Nombre === 'Sin Coleccion' && activeCategoryId) {
+                prods = prods.filter(p => p.Categoria_ID == activeCategoryId);
+            }
+            renderProductos(prods);
             viewHome.classList.add('hidden');
             viewProd.classList.remove('hidden');
             window.scrollTo(0, 0);
@@ -937,9 +662,9 @@
         };
 
         function renderNav(activeCatId) {
-            let html = '<button onclick="goHome()" class="' + (!activeCatId ? 'active' : '') + '">Todo</button>';
+            let html = '<a href="index.html" class="' + (!activeCatId ? 'active' : '') + '">Todo</a>';
             allCategorias.forEach(cat => {
-                html += '<button onclick="filterByCategory(' + cat.ID + ',\'' + cat.Nombre + '\')" class="' + (activeCatId == cat.ID ? 'active' : '') + '">' + cat.Nombre + '</button>';
+                html += '<a href="colecciones.html?categoria_id=' + cat.ID + '" class="' + (activeCatId == cat.ID ? 'active' : '') + '">' + cat.Nombre + '</a>';
             });
             navCat.innerHTML = html;
         }
@@ -970,11 +695,22 @@
             }
             list.forEach(s => {
                 const count = allProductos.filter(p => p.Serie_ID === s.ID).length;
-                const label = s.Etiqueta || (count + ' diseños');
+                const label = count + ' diseños';
                 const cta = 'Explorar →';
+                let imgSrc = s.URL_Imagen;
+                if (!imgSrc) {
+                    let fp;
+                    if (activeCategoryId) {
+                        fp = allProductos.find(p => p.Serie_ID === s.ID && p.Categoria_ID == activeCategoryId);
+                    } else {
+                        fp = allProductos.find(p => p.Serie_ID === s.ID);
+                    }
+                    if (fp) imgSrc = fp.URL_Imagen;
+                }
+                if (!imgSrc) imgSrc = 'https://placehold.co/600x800/2D3D33/F5F2ED?text=' + s.Nombre;
                 seriesGrid.innerHTML +=
                     '<div onclick="openSerie(' + s.ID + ')" class="collection-card">' +
-                    '<img src="' + (s.URL_Imagen || 'https://placehold.co/600x800/2D3D33/F5F2ED?text=' + s.Nombre) + '" onerror="this.src=\'https://placehold.co/600x800/2D3D33/F5F2ED?text=' + s.Nombre + '\'" alt="' + s.Nombre + '">' +
+                    '<img src="' + imgSrc + '" onerror="this.src=\'https://placehold.co/600x800/2D3D33/F5F2ED?text=' + s.Nombre + '\'" alt="' + s.Nombre + '">' +
                     '<div class="collection-overlay">' +
                     '<span class="card-label">' + label + '</span>' +
                     '<h3>' + s.Nombre + '</h3>' +
@@ -1025,9 +761,17 @@
                 }
                 renderNav(null);
                 renderCategoriasCards(null);
-                renderSeries(allSeries);
-                setHeroImages(allSeries);
+                renderSeries(allSeries.filter(s => s.Nombre !== 'Sin Coleccion'));
+                setHeroImages(allSeries.filter(s => s.Nombre !== 'Sin Coleccion'));
                 actualizarContadorCarrito();
+                if (typeof handleSearch === 'function') handleSearch();
+
+                const footerCat = document.getElementById('footer-categorias');
+                if (footerCat && allCategorias.length) {
+                    allCategorias.forEach(c => {
+                        footerCat.innerHTML += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + c.Nombre + '</a>';
+                    });
+                }
             } catch (e) {
                 console.error('Error al cargar datos:', e);
             }

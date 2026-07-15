@@ -44,9 +44,13 @@ CREATE TABLE IF NOT EXISTS Imagenes_Productos (
 -- ADD FOREIGN KEY (Categoria_ID) REFERENCES Categorias(ID) ON DELETE SET NULL;
 -- ALTER TABLE Imagenes_Productos ADD COLUMN Precio VARCHAR(50) AFTER Categoria_ID;
 
--- Insertar administrador de prueba
-INSERT INTO Admins (Usuario, Contrasena) VALUES ('admin', 'admin123')
-ON DUPLICATE KEY UPDATE Usuario=Usuario;
+ALTER TABLE Series ADD COLUMN IF NOT EXISTS Etiqueta VARCHAR(100) DEFAULT NULL AFTER URL_Imagen;
+ALTER TABLE Series ADD COLUMN IF NOT EXISTS CTA_Texto VARCHAR(100) DEFAULT NULL AFTER Etiqueta;
+ALTER TABLE Series ADD COLUMN IF NOT EXISTS Precio VARCHAR(50) DEFAULT NULL AFTER CTA_Texto;
+
+-- Insertar administrador de prueba (contraseña en hash bcrypt)
+-- La contraseña se genera automáticamente al iniciar app.py si no existe el admin
+-- Ejecuta POST /api/register con {"usuario": "admin", "contrasena": "admin123"} para crear uno manualmente
 
 -- Insertar algunas categorías por defecto
 INSERT INTO Categorias (Nombre, URL_Imagen) VALUES 

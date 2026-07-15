@@ -1,19 +1,14 @@
 {
   "categorias": [
     {
-      "ID": 7,
-      "Nombre": "Cuadros",
-      "URL_Imagen": ""
+      "ID": 8,
+      "Nombre": "Musica",
+      "URL_Imagen": "https://i.ibb.co/V0PbQ49v/4a4ed4408b99.png"
     },
     {
       "ID": 6,
       "Nombre": "Peliculas",
-      "URL_Imagen": ""
-    },
-    {
-      "ID": 4,
-      "Nombre": "Diseños Personalizados",
-      "URL_Imagen": null
+      "URL_Imagen": "https://i.ibb.co/5gNf3vFL/5121a54f6458.jpg"
     },
     {
       "ID": 3,
@@ -23,54 +18,428 @@
     {
       "ID": 2,
       "Nombre": "anime",
-      "URL_Imagen": "https://placehold.co/400x600/1a1a2e/ffffff?text=Anime"
+      "URL_Imagen": "https://i.ibb.co/PG0zYTrP/52f3fa3c9d02.jpg"
     }
   ],
   "series": [
     {
-      "ID": 3,
-      "Nombre": "Futbol",
-      "Descripcion": "jugadores",
-      "URL_Imagen": "https://i.ibb.co/GvVBgFPL/M-E-S-S-I.png",
+      "ID": 19,
+      "Nombre": "Sin Coleccion",
+      "Descripcion": "Productos sin coleccion asignada",
+      "URL_Imagen": null,
+      "Precio": null,
+      "Categoria_ID": null,
+      "Categoria_Nombre": null
+    },
+    {
+      "ID": 15,
+      "Nombre": "Lionel Messi",
+      "Descripcion": "Lionel Messi: Colección de Leyenda. El arte detrás del mejor jugador de todos los tiempos",
+      "URL_Imagen": "https://i.ibb.co/jvvc3Xq0/13f35cdbcc97.jpg",
+      "Precio": "",
       "Categoria_ID": 3,
       "Categoria_Nombre": "Deportes"
     },
     {
-      "ID": 2,
-      "Nombre": "Berserk",
-      "Descripcion": "La lucha eterna del Espadachín Negro. Sumérgete en la obra maestra del dark fantasy y enfrenta al destino con nuestros diseños exclusivos.",
-      "URL_Imagen": "https://i.ibb.co/xZ4rfyZ/Whats-App-Image-2026-05-29-at-12-26-08-PM-1.jpg",
+      "ID": 14,
+      "Nombre": "One Piece",
+      "Descripcion": "Únete a la tripulación del Sombrero de Paja. Encuentra los diseños más épicos y los carteles de recompensa de los piratas más buscados de los mares",
+      "URL_Imagen": "https://i.ibb.co/4gRtrfnD/8a4ce19d0da3.jpg",
+      "Precio": "",
       "Categoria_ID": 2,
       "Categoria_Nombre": "anime"
     },
     {
-      "ID": 1,
-      "Nombre": "one piece",
-      "Descripcion": "guerrero",
-      "URL_Imagen": "https://i.ibb.co/tw04tXZN/luffy-tipo-carta.png",
+      "ID": 13,
+      "Nombre": "Vinland Saga",
+      "Descripcion": "De la sed de venganza a la búsqueda de la paz. Captura la esencia de uno de los mejores animes históricos con este póster de Vinland Saga",
+      "URL_Imagen": "https://i.ibb.co/tPNt3SQ9/8d66664631e1.jpg",
+      "Precio": "",
+      "Categoria_ID": 2,
+      "Categoria_Nombre": "anime"
+    },
+    {
+      "ID": 12,
+      "Nombre": "Dr. STONE",
+      "Descripcion": "Despierta tu lado científico con diseños inspirados en Senku y la reconstrucción de la civilización. ¡10 mil millones por ciento épicos!",
+      "URL_Imagen": "https://i.ibb.co/WpMqkLWQ/dd7c4d78cfe6.jpg",
+      "Precio": null,
+      "Categoria_ID": 2,
+      "Categoria_Nombre": "anime"
+    },
+    {
+      "ID": 11,
+      "Nombre": "Panini",
+      "Descripcion": "El estilo clásico de los cromos y estampas reinventado para los verdaderos coleccionistas.",
+      "URL_Imagen": "https://i.ibb.co/4CBtV76/de5d85543116.png",
+      "Precio": null,
+      "Categoria_ID": 3,
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 10,
+      "Nombre": "Neymar Jr",
+      "Descripcion": "La magia y el talento del fútbol brasileño capturados con un estilo inconfundible",
+      "URL_Imagen": "https://i.ibb.co/Mx7pRRBQ/06513a84b9af.jpg",
+      "Precio": null,
+      "Categoria_ID": 3,
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 9,
+      "Nombre": "Kylian Mbappé",
+      "Descripcion": "Velocidad y potencia pura. Piezas únicas dedicadas al astro francés.",
+      "URL_Imagen": "https://i.ibb.co/2Yh3Bs4G/23d596231992.jpg",
+      "Precio": null,
+      "Categoria_ID": 3,
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 8,
+      "Nombre": "Cristiano Ronaldo",
+      "Descripcion": "Rinde homenaje a la leyenda del fútbol con estos diseños exclusivos de CR7.",
+      "URL_Imagen": "https://i.ibb.co/qLhwshDw/84fb6be00307.png",
+      "Precio": null,
+      "Categoria_ID": 3,
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 7,
+      "Nombre": "Vagabond",
+      "Descripcion": "El camino del samurái ilustrado con trazos profundos inspirados en Miyamoto Musashi.",
+      "URL_Imagen": "https://i.ibb.co/4RbgFMhc/e1f8e17bc034.png",
+      "Precio": null,
+      "Categoria_ID": 2,
+      "Categoria_Nombre": "anime"
+    },
+    {
+      "ID": 6,
+      "Nombre": "Berserk",
+      "Descripcion": "Sumérgete en el oscuro y brutal mundo de fantasía de Kentaro Miura. Diseños épicos de Guts, el Espadachín Negro, y su incesante lucha",
+      "URL_Imagen": "https://i.ibb.co/d4gFf0Zs/d9312e77926a.png",
+      "Precio": "",
+      "Categoria_ID": 2,
+      "Categoria_Nombre": "anime"
+    },
+    {
+      "ID": 5,
+      "Nombre": "JoJo's Bizarre Adventure",
+      "Descripcion": "Diseños épicos inspirados en el linaje Joestar, sus icónicas poses y stands.",
+      "URL_Imagen": "https://i.ibb.co/FbMG9yvk/b5138a41ae1c.jpg",
+      "Precio": null,
       "Categoria_ID": 2,
       "Categoria_Nombre": "anime"
     }
   ],
   "productos": [
     {
-      "ID": 2,
-      "Nombre": "Messi",
-      "URL_Imagen": "https://i.ibb.co/GQK5S6GZ/Whats-App-Image-2026-06-22-at-5-46-35-PM-1.jpg",
-      "Serie_ID": 3,
+      "ID": 36,
+      "Nombre": "Cristiano Ronaldo - Manchester United - Poster Artístico",
+      "URL_Imagen": "https://i.ibb.co/d4fCThfk/6c43a7662f1f.jpg",
+      "Serie_ID": 8,
       "Categoria_ID": 3,
-      "Precio": "15$",
-      "Serie_Nombre": "Futbol",
+      "Precio": "",
+      "Serie_Nombre": "Cristiano Ronaldo",
       "Categoria_Nombre": "Deportes"
     },
     {
-      "ID": 1,
-      "Nombre": "luffy",
-      "URL_Imagen": "https://i.ibb.co/tw04tXZN/luffy-tipo-carta.png",
-      "Serie_ID": 1,
+      "ID": 35,
+      "Nombre": "Cristiano Ronaldo - Red Devil - Poster Estilo Retro",
+      "URL_Imagen": "https://i.ibb.co/mVg9KwJw/08183a507117.jpg",
+      "Serie_ID": 8,
+      "Categoria_ID": 3,
+      "Precio": "",
+      "Serie_Nombre": "Cristiano Ronaldo",
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 34,
+      "Nombre": "Kylian Mbappé - Real Madrid - Poster Deportivo Minimalista",
+      "URL_Imagen": "https://i.ibb.co/2Yh3Bs4G/23d596231992.jpg",
+      "Serie_ID": 9,
+      "Categoria_ID": 3,
+      "Precio": "",
+      "Serie_Nombre": "Kylian Mbappé",
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 33,
+      "Nombre": "Lionel Messi - Campeón del Mundo - Poster Deportivo Épico",
+      "URL_Imagen": "https://i.ibb.co/jvvc3Xq0/13f35cdbcc97.jpg",
+      "Serie_ID": 15,
+      "Categoria_ID": 3,
+      "Precio": "",
+      "Serie_Nombre": "Lionel Messi",
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 32,
+      "Nombre": "Lionel Messi - Trayectoria de Leyenda - Poster Collage",
+      "URL_Imagen": "https://i.ibb.co/pB8R4MFT/4b59bf7f8c41.jpg",
+      "Serie_ID": 15,
+      "Categoria_ID": 3,
+      "Precio": "",
+      "Serie_Nombre": "Lionel Messi",
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 31,
+      "Nombre": "Neymar Jr - Estrella de Brasil - Poster Estilo Gráfico",
+      "URL_Imagen": "https://i.ibb.co/Mx7pRRBQ/06513a84b9af.jpg",
+      "Serie_ID": 10,
+      "Categoria_ID": 3,
+      "Precio": "",
+      "Serie_Nombre": "Neymar Jr",
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 30,
+      "Nombre": "Cristiano Ronaldo - Leyenda Real Madrid - Poster Artístico",
+      "URL_Imagen": "https://i.ibb.co/fVsLq4mW/30d0a341fcd7.png",
+      "Serie_ID": 8,
+      "Categoria_ID": 3,
+      "Precio": "",
+      "Serie_Nombre": "Cristiano Ronaldo",
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 29,
+      "Nombre": "Lamine Yamal - Trayectoria Golden Boy ",
+      "URL_Imagen": "https://i.ibb.co/5XPkS3F2/3e175ef555fd.jpg",
+      "Serie_ID": 19,
+      "Categoria_ID": 3,
+      "Precio": "",
+      "Serie_Nombre": "Sin Coleccion",
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 28,
+      "Nombre": "Lionel Messi - Celebración de Gol - Poster Deportivo Gráfico",
+      "URL_Imagen": "https://i.ibb.co/NnWt5qmD/d97b601a6260.jpg",
+      "Serie_ID": 15,
+      "Categoria_ID": 3,
+      "Precio": "",
+      "Serie_Nombre": "Lionel Messi",
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 27,
+      "Nombre": "Neymar Jr. - Celebración Champions League 2015 - Estilo Gráfico Vintage",
+      "URL_Imagen": "https://i.ibb.co/k6Ss1ZwF/9c305f955dd3.jpg",
+      "Serie_ID": 10,
+      "Categoria_ID": 3,
+      "Precio": "",
+      "Serie_Nombre": "Neymar Jr",
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 26,
+      "Nombre": "Cristiano Ronaldo - Evolución y Títulos",
+      "URL_Imagen": "https://i.ibb.co/SwqF2zrL/5d51d7d8f662.jpg",
+      "Serie_ID": 8,
+      "Categoria_ID": 3,
+      "Precio": "",
+      "Serie_Nombre": "Cristiano Ronaldo",
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 25,
+      "Nombre": "Cristiano Ronaldo - Seleccion Portugal 2026 - Panini",
+      "URL_Imagen": "https://i.ibb.co/gMYrVP83/b6d5fe47f625.jpg",
+      "Serie_ID": 11,
+      "Categoria_ID": 3,
+      "Precio": "",
+      "Serie_Nombre": "Panini",
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 24,
+      "Nombre": "Erling Haaland - Seleccion Noruega 2026 - Panini",
+      "URL_Imagen": "https://i.ibb.co/4CBtV76/de5d85543116.png",
+      "Serie_ID": 11,
+      "Categoria_ID": 3,
+      "Precio": "",
+      "Serie_Nombre": "Panini",
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 23,
+      "Nombre": "Lamine Yamal - Seleccion España 2026 - Panini",
+      "URL_Imagen": "https://i.ibb.co/TB9SYsxV/98c3a541d67e.png",
+      "Serie_ID": 11,
+      "Categoria_ID": 3,
+      "Precio": "",
+      "Serie_Nombre": "Panini",
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 22,
+      "Nombre": "Luka Modrić - Seleccion Croacia 2026 - Panini",
+      "URL_Imagen": "https://i.ibb.co/N2z13rB6/b45cd552a4b1.png",
+      "Serie_ID": 11,
+      "Categoria_ID": 3,
+      "Precio": "",
+      "Serie_Nombre": "Panini",
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 21,
+      "Nombre": "Raphinha - Seleccion Brasil 2026 - Panini",
+      "URL_Imagen": "https://i.ibb.co/dsxNZBc6/e61035d7674e.png",
+      "Serie_ID": 11,
+      "Categoria_ID": 3,
+      "Precio": "",
+      "Serie_Nombre": "Panini",
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 20,
+      "Nombre": "Kylian Mbappé - Seleccion Francia 2026 - Panini",
+      "URL_Imagen": "https://i.ibb.co/VYTQZ9cC/5f1f70f7bc1c.png",
+      "Serie_ID": 11,
+      "Categoria_ID": 3,
+      "Precio": "",
+      "Serie_Nombre": "Panini",
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 19,
+      "Nombre": "Lionel Messi - Seleccion Argentina 2026 - Panini",
+      "URL_Imagen": "https://i.ibb.co/4n4xNXfd/c4627c4e0b62.png",
+      "Serie_ID": 11,
+      "Categoria_ID": 3,
+      "Precio": "",
+      "Serie_Nombre": "Panini",
+      "Categoria_Nombre": "Deportes"
+    },
+    {
+      "ID": 18,
+      "Nombre": "Vinland Saga - Thorfinn - Póster I Have No Enemies",
+      "URL_Imagen": "https://i.ibb.co/v6ggKb1b/b826ce587b24.jpg",
+      "Serie_ID": 13,
       "Categoria_ID": 2,
-      "Precio": null,
-      "Serie_Nombre": "one piece",
+      "Precio": "",
+      "Serie_Nombre": "Vinland Saga",
+      "Categoria_Nombre": "anime"
+    },
+    {
+      "ID": 16,
+      "Nombre": "Vinland Saga - Thorfinn - Atardecer de Redención",
+      "URL_Imagen": "https://i.ibb.co/tPNt3SQ9/8d66664631e1.jpg",
+      "Serie_ID": 13,
+      "Categoria_ID": 2,
+      "Precio": "",
+      "Serie_Nombre": "Vinland Saga",
+      "Categoria_Nombre": "anime"
+    },
+    {
+      "ID": 15,
+      "Nombre": "Vagabond - Musashi Miyamoto - Reflexión y Sombras",
+      "URL_Imagen": "https://i.ibb.co/HfFfKJMk/99daa278b817.jpg",
+      "Serie_ID": 7,
+      "Categoria_ID": 2,
+      "Precio": "",
+      "Serie_Nombre": "Vagabond",
+      "Categoria_Nombre": "anime"
+    },
+    {
+      "ID": 14,
+      "Nombre": "Vagabond - Musashi Miyamoto - Portada Clásica con Katana",
+      "URL_Imagen": "https://i.ibb.co/4RbgFMhc/e1f8e17bc034.png",
+      "Serie_ID": 7,
+      "Categoria_ID": 2,
+      "Precio": "",
+      "Serie_Nombre": "Vagabond",
+      "Categoria_Nombre": "anime"
+    },
+    {
+      "ID": 13,
+      "Nombre": "One Piece - Usopp - Cartel Wanted God Usopp",
+      "URL_Imagen": "https://i.ibb.co/m561JMvf/6df4a2840a0d.jpg",
+      "Serie_ID": 14,
+      "Categoria_ID": 2,
+      "Precio": "",
+      "Serie_Nombre": "One Piece",
+      "Categoria_Nombre": "anime"
+    },
+    {
+      "ID": 12,
+      "Nombre": "One Piece - Luffy Gear 5 - Pose sobre Carteles de Recompensa",
+      "URL_Imagen": "https://i.ibb.co/4gRtrfnD/8a4ce19d0da3.jpg",
+      "Serie_ID": 14,
+      "Categoria_ID": 2,
+      "Precio": "",
+      "Serie_Nombre": "One Piece",
+      "Categoria_Nombre": "anime"
+    },
+    {
+      "ID": 11,
+      "Nombre": "One Piece - Luffy Gear 5 - Cartel Wanted Clásico",
+      "URL_Imagen": "https://i.ibb.co/x8RLNfcG/100b505b5cd0.png",
+      "Serie_ID": 14,
+      "Categoria_ID": 2,
+      "Precio": "",
+      "Serie_Nombre": "One Piece",
+      "Categoria_Nombre": "anime"
+    },
+    {
+      "ID": 10,
+      "Nombre": "Hunter x Hunter - Gon y Killua - Portada Manga Vol. 6",
+      "URL_Imagen": "https://i.ibb.co/PG0zYTrP/52f3fa3c9d02.jpg",
+      "Serie_ID": 19,
+      "Categoria_ID": 2,
+      "Precio": "",
+      "Serie_Nombre": "Sin Coleccion",
+      "Categoria_Nombre": "anime"
+    },
+    {
+      "ID": 9,
+      "Nombre": "Fullmetal Alchemist - Edward y Alphonse - Círculo de Transmutación",
+      "URL_Imagen": "https://i.ibb.co/s9QFy2SG/c1907c309c49.jpg",
+      "Serie_ID": 19,
+      "Categoria_ID": 2,
+      "Precio": "",
+      "Serie_Nombre": "Sin Coleccion",
+      "Categoria_Nombre": "anime"
+    },
+    {
+      "ID": 8,
+      "Nombre": "JoJo's Bizarre Adventure - Jesucristo - Arte Steel Ball Run",
+      "URL_Imagen": "https://i.ibb.co/FbMG9yvk/b5138a41ae1c.jpg",
+      "Serie_ID": 5,
+      "Categoria_ID": 2,
+      "Precio": "",
+      "Serie_Nombre": "JoJo's Bizarre Adventure",
+      "Categoria_Nombre": "anime"
+    },
+    {
+      "ID": 7,
+      "Nombre": "Dr. Stone - Senku y Aldea Ishigami - Reino de la Ciencia",
+      "URL_Imagen": "https://i.ibb.co/WpMqkLWQ/dd7c4d78cfe6.jpg",
+      "Serie_ID": 12,
+      "Categoria_ID": 2,
+      "Precio": "",
+      "Serie_Nombre": "Dr. STONE",
+      "Categoria_Nombre": "anime"
+    },
+    {
+      "ID": 6,
+      "Nombre": "Berserk - Guts - Espada Matadragones",
+      "URL_Imagen": "https://i.ibb.co/d4gFf0Zs/d9312e77926a.png",
+      "Serie_ID": 6,
+      "Categoria_ID": 2,
+      "Precio": "",
+      "Serie_Nombre": "Berserk",
+      "Categoria_Nombre": "anime"
+    },
+    {
+      "ID": 5,
+      "Nombre": "Berserk - Guts - Póster Armadura Berserker",
+      "URL_Imagen": "https://i.ibb.co/r2C71VPv/a28ab5ec6398.jpg",
+      "Serie_ID": 6,
+      "Categoria_ID": 2,
+      "Precio": "",
+      "Serie_Nombre": "Berserk",
       "Categoria_Nombre": "anime"
     }
   ]
