@@ -248,7 +248,7 @@ function cargarNav() {
         if (drawerNav) drawerNav.innerHTML = dhtml;
         const footerCat = document.getElementById('footer-categorias');
         if (footerCat) {
-            data.categorias.forEach(c => {
+            data.categorias.slice(0, 3).forEach(c => {
                 footerCat.innerHTML += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + c.Nombre + '</a>';
             });
         }
@@ -266,7 +266,7 @@ function cargarNav() {
             if (drawerNav) drawerNav.innerHTML = dhtml;
             const footerCat = document.getElementById('footer-categorias');
             if (footerCat) {
-                data.categorias.forEach(c => {
+                data.categorias.slice(0, 3).forEach(c => {
                     footerCat.innerHTML += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + c.Nombre + '</a>';
                 });
             }
@@ -287,5 +287,8 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             toggleSearchMobile();
         }
+    });
+    document.getElementById('search-mobile-overlay')?.addEventListener('click', e => {
+        if (e.target === e.currentTarget) toggleSearchMobile();
     });
 });

@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilos-compartidos.css">
     <style>
-        .productos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 14px; }
+        .productos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 14px; }
         .product-card {
             background: var(--surface); border-radius: var(--radius); overflow: hidden;
             border: 1px solid var(--border); transition: var(--transition); cursor: pointer;
@@ -34,7 +34,6 @@
             font-weight: 600; font-size: .9rem; transition: var(--transition);
         }
         .add-cart-btn:hover { background: var(--primary); color: var(--text); }
-        @media (max-width: 600px) { .productos-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 
@@ -197,7 +196,7 @@
 
             const footerCat = document.getElementById('footer-categorias');
             if (footerCat && allCategorias.length) {
-                allCategorias.forEach(c => {
+                allCategorias.slice(0, 3).forEach(c => {
                     footerCat.innerHTML += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + c.Nombre + '</a>';
                 });
             }
@@ -251,6 +250,9 @@
                     e.preventDefault();
                     toggleSearchMobile();
                 }
+            });
+            document.getElementById('search-mobile-overlay')?.addEventListener('click', e => {
+                if (e.target === e.currentTarget) toggleSearchMobile();
             });
         });
 

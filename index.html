@@ -31,7 +31,8 @@
             transition: transform .5s ease;
         }
         .carousel-slide {
-            min-width: 100%;
+            flex: 0 0 100%;
+            width: 100%;
             position: relative;
             aspect-ratio: 21/9;
             background: var(--surface);
@@ -50,7 +51,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 40px;
+            padding: 40px 40px 80px;
             background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.3) 60%, transparent 100%);
         }
         .hero-overlay h1 {
@@ -235,7 +236,7 @@
 
         .productos-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             gap: 14px;
         }
         .product-card {
@@ -275,8 +276,8 @@
         @media (max-width: 768px) {
             .hero-overlay h1 { font-size: 1.8rem; }
             .carousel-slide { aspect-ratio: 16/9; }
-            .hero { margin: 16px 0; }
-            .hero-overlay { padding: 24px; }
+            .hero { margin: 16px auto; }
+            .hero-overlay { padding: 24px 24px 60px; }
             .carousel-arrow { width: 36px; height: 36px; font-size: 1.2rem; }
             .carousel-arrow.left { left: 8px; }
             .carousel-arrow.right { right: 8px; }
@@ -289,7 +290,6 @@
         @media (max-width: 480px) {
             .hero-overlay h1 { font-size: 1.4rem; }
             .hero-overlay p { font-size: .8rem; }
-            .productos-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -847,7 +847,7 @@
 
                 const footerCat = document.getElementById('footer-categorias');
                 if (footerCat && allCategorias.length) {
-                    allCategorias.forEach(c => {
+                    allCategorias.slice(0, 3).forEach(c => {
                         footerCat.innerHTML += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + c.Nombre + '</a>';
                     });
                 }
@@ -866,6 +866,9 @@
                     e.preventDefault();
                     toggleSearchMobile();
                 }
+            });
+            document.getElementById('search-mobile-overlay')?.addEventListener('click', e => {
+                if (e.target === e.currentTarget) toggleSearchMobile();
             });
         });
     </script>

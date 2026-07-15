@@ -1,0 +1,4 @@
+[OK] Admin por defecto actualizado: usuario='admin', contrasena='admin123'
+Iniciando servidor de Poster&Poster en http://localhost:5000...
+ * Serving Flask app 'app'
+ * Debug mode: off
