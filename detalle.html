@@ -13,15 +13,11 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilos-compartidos.css">
     <link rel="stylesheet" href="detalle.css">
 </head>
 <body>
-    <div class="top-bar">
-        <p>✨ Diseños premium • Calidad garantizada • Envíos disponibles</p>
-    </div>
-
     <header class="header">
         <div class="container">
             <a href="index.html" class="logo">
@@ -30,12 +26,38 @@
             </a>
             <nav class="nav" id="nav-categorias"></nav>
             <div class="header-actions">
+                <div class="search-box">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.602 10.602Z" />
+                    </svg>
+                    <input type="text" id="search-nav-input" class="search-input" placeholder="Buscar colecciones..." onkeydown="if(event.key=='Enter'&&this.value.trim())window.location='/?q='+encodeURIComponent(this.value.trim())">
+                </div>
                 <a href="carrito.html" class="cart-button" title="Carrito">🛒<span class="cart-count" id="cart-counter">0</span></a>
                 <a href="index.html" class="btn-primary">Comprar</a>
                 <a href="admin.html" class="admin-btn" title="Admin">🔧</a>
+                <button class="hamburger" id="hamburger-btn" aria-label="Menú">
+                    <span></span><span></span><span></span>
+                </button>
             </div>
         </div>
     </header>
+
+    <!-- Drawer overlay -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <!-- Drawer panel -->
+    <div class="drawer" id="drawer-menu">
+        <div class="drawer-header">
+            <span class="logo-text">Poster<span>&</span>Poster</span>
+            <button class="drawer-close" id="drawer-close" aria-label="Cerrar">✕</button>
+        </div>
+        <nav class="drawer-nav" id="drawer-nav"></nav>
+    </div>
+
+    <!-- Mobile search overlay -->
+    <div class="search-mobile-overlay" id="search-mobile-overlay">
+        <input type="text" id="search-mobile-input" placeholder="Buscar colecciones..." onkeydown="if(event.key=='Enter'&&this.value.trim()){window.location='/?q='+encodeURIComponent(this.value.trim())}">
+        <button class="search-mobile-close" onclick="toggleSearchMobile()">✕</button>
+    </div>
 
     <main>
         <div class="container" style="padding-top: 20px;">
@@ -68,7 +90,6 @@
                 <span class="product-category" id="product-cat">Categoría</span>
                 <h1 class="product-title" id="product-title">Nombre del Producto</h1>
                 <div class="product-price-display" id="product-price">$0.00</div>
-                <p class="product-description" id="product-desc">Cargando descripción...</p>
 
                 <div class="selectors-group">
                     <label>Tamaño:</label>
@@ -97,9 +118,10 @@
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-col">
-                <img src="https://placehold.co/60x60/2D3D33/F5F2ED?text=PP" alt="Poster&Poster" class="footer-logo">
+                <img src="https://placehold.co/40x40/2D3D33/E8E0D6?text=PP" alt="Poster&Poster" class="footer-logo">
                 <h2>Poster&Poster</h2>
                 <p class="footer-text">Cuadros y posters premium inspirados en anime, videojuegos, deportes y cultura pop.</p>
+                <p class="footer-copy">&copy; 2026 Poster&Poster &bull; Todos los derechos reservados.</p>
             </div>
             <div class="footer-col">
                 <h3>Enlaces</h3>
@@ -110,19 +132,16 @@
             </div>
             <div class="footer-col">
                 <h3>Contacto</h3>
-                <p>📱 WhatsApp</p>
-                <a href="https://wa.me/584247041639">+58 4247041639</a>
+                <a href="https://wa.me/584247041639">WhatsApp</a>
                 <a href="#">Instagram</a>
                 <a href="#">TikTok</a>
-            </div>
-            <div class="footer-col">
+                <hr class="footer-divider">
                 <h3>Metodos de pago</h3>
-                <p>💲 Binance</p>
-                <p>🇨🇴 Pesos colombianos</p>
-                <p>🇻🇪 Bolivares</p>
+                <p>Binance</p>
+                <p>Pesos colombianos</p>
+                <p>Bolivares</p>
             </div>
         </div>
-        <div class="container footer-copy">© 2026 Poster&Poster • Todos los derechos reservados.</div>
     </footer>
 
     <script src="detalle.js"></script>

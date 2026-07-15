@@ -16,379 +16,285 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Press+Start+2P&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilos-compartidos.css">
     <style>
         .hero {
-            padding: 80px 0 60px;
-        }
-
-        .hero-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            gap: 80px;
-        }
-
-        .hero-tag {
-            display: inline-block;
-            margin-bottom: 20px;
-            padding: 8px 18px;
-            border: 1px solid rgba(45, 61, 51, .25);
-            border-radius: 999px;
-            color: var(--primary);
-            font-size: .9rem;
-            font-weight: 600;
-            letter-spacing: .5px;
-        }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            line-height: 1.1;
-            margin-bottom: 25px;
-        }
-
-        .hero-content p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 40px;
-            max-width: 600px;
-        }
-
-
-        .hero-gallery {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr 1fr;
-            align-items: center;
-            gap: 25px;
-        }
-
-        .hero-card {
-            border-radius: 22px;
+            position: relative;
             overflow: hidden;
+            border-radius: var(--radius);
+            width: min(92%, var(--container));
+            margin: 24px auto;
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform .5s ease;
+        }
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+            aspect-ratio: 21/9;
             background: var(--surface);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, .35);
-            transition: var(--transition);
+        }
+        .carousel-slide img {
+            width: 100%; height: 100%; object-fit: cover;
+            display: block;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.3) 60%, transparent 100%);
+        }
+        .hero-overlay h1 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 10px;
+            line-height: 1.1;
+        }
+        .hero-overlay p {
+            color: rgba(255,255,255,.65);
+            font-size: .95rem;
+            max-width: 480px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        .carousel-slide { cursor: pointer; }
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 44px; height: 44px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.55);
+            color: #fff;
+            font-size: 1.6rem;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s;
+            backdrop-filter: blur(4px);
         }
-
-        .hero-card img {
-            width: 100%;
-            aspect-ratio: 3/4;
-            object-fit: cover;
-            transition: var(--transition);
+        .carousel-arrow:hover { background: rgba(0,0,0,0.8); }
+        .carousel-arrow.left { left: 16px; }
+        .carousel-arrow.right { right: 16px; }
+        .carousel-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
         }
-
-        .hero-card:hover {
-            transform: translateY(-10px);
+        .carousel-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            border: none;
+            cursor: pointer;
+            transition: all .3s;
+            padding: 0;
         }
-
-        .hero-left {
-            transform: scale(.9);
-        }
-
-        .hero-center {
-            transform: scale(1.1);
-            z-index: 2;
-        }
-
-        .hero-right {
-            transform: scale(.9);
-        }
-
-        .hero-left:hover {
-            transform: scale(.9) translateY(-10px);
-        }
-
-        .hero-center:hover {
-            transform: scale(1.1) translateY(-10px);
-        }
-
-        .hero-right:hover {
-            transform: scale(.9) translateY(-10px);
-        }
+        .carousel-dot.active { background: #fff; transform: scale(1.25); }
 
         .section-header {
-            max-width: 700px;
-            margin: 0 auto 70px;
+            max-width: 600px;
+            margin: 0 auto 36px;
             text-align: center;
         }
-
         .section-header span {
-            color: var(--primary);
+            color: var(--accent);
             font-weight: 600;
-            letter-spacing: 1px;
+            letter-spacing: .5px;
+            font-size: .8rem;
         }
-
         .section-header h2 {
-            font-size: 2.8rem;
-            margin: 15px 0;
+            font-size: 1.5rem;
+            margin: 8px 0;
         }
-
         .section-header p {
             color: var(--text-secondary);
-            line-height: 1.7;
+            line-height: 1.6;
+            font-size: .85rem;
+        }
+
+        .cat-scroll-wrapper { position: relative; }
+        .card-container {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 8px 0;
+        }
+        .card-container::-webkit-scrollbar { display: none; }
+        .category-card {
+            position: relative;
+            flex-shrink: 0;
+            width: calc((100% - 48px) / 4);
+            max-width: 270px;
+            aspect-ratio: 2/3;
+            border-radius: 12px;
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            transition: transform .3s ease;
+            scroll-snap-align: start;
+            cursor: pointer;
+        }
+        .category-card:active { transform: scale(0.97); }
+        .card-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 50%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+        }
+        .card-content {
+            position: absolute; bottom: 24px; left: 0; width: 100%;
+            text-align: center; z-index: 2;
+        }
+        .card-title {
+            color: #fff; font-size: 1rem; font-weight: 700;
+            margin: 0 0 8px 0; letter-spacing: 1px; text-transform: uppercase;
+        }
+        .card-desc { color: rgba(255,255,255,.6); font-size: .75rem; margin-bottom: 10px; }
+        .card-btn {
+            display: inline-block;
+            background: rgba(0,0,0,0.55);
+            color: #fff; text-decoration: none;
+            padding: 7px 20px; border-radius: 999px;
+            font-size: .8rem; font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all .3s ease;
+        }
+        .card-btn:hover { background: #fff; color: #000; border-color: #fff; }
+        .scroll-arrow {
+            position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+            width: 40px; height: 40px; border-radius: 50%;
+            background: var(--surface); border: 1px solid var(--border);
+            color: var(--text); font-size: 1.2rem; cursor: pointer;
+            display: none; align-items: center; justify-content: center;
+            z-index: 5; box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+        @media (max-width: 600px) {
+            .category-card { width: 160px; }
         }
 
         .colecciones {
-            padding: 60px 0 120px;
+            padding: 40px 0 60px;
         }
-
-        .colecciones-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
+        .masonry-gallery {
+            column-count: 5;
+            column-gap: 12px;
+            max-width: 1100px;
+            margin: 0 auto;
         }
-
-        .collection-card {
+        .masonry-item {
             position: relative;
+            break-inside: avoid;
+            margin-bottom: 14px;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+            transition: transform .2s ease;
             overflow: hidden;
-            aspect-ratio: 2/3;
-            border-radius: 24px;
-            border: 1px solid var(--border);
-            background: var(--surface);
-            transition: var(--transition);
             cursor: pointer;
         }
-
-        .collection-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .collection-overlay {
+        .masonry-item:hover { transform: scale(1.03); }
+        .masonry-item img { width: 100%; display: block; height: auto; }
+        .masonry-item .card-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); z-index: 1; pointer-events: none; }
+        .masonry-item .card-content { position: absolute; left: 0; width: 100%; text-align: center; z-index: 2; pointer-events: none; }
+        .masonry-item .card-btn { pointer-events: auto; }
+        .badge {
             position: absolute;
-            inset: 0;
+            top: 8px;
+            left: 8px;
+            background: var(--primary);
+            color: var(--text);
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
             z-index: 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 30px;
-            background: linear-gradient(to top, rgba(0, 0, 0, .92), transparent);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
-
-        .collection-overlay .card-label {
-            font-family: 'Press Start 2P', monospace;
-            font-size: .6rem;
-            color: #F5F2ED;
-            margin-bottom: 12px;
-            letter-spacing: .5px;
-        }
-
-        .collection-overlay h3 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 10px;
-            line-height: 1.2;
-        }
-
-        .collection-overlay p {
-            color: #d6d6d6;
-            line-height: 1.7;
-            font-size: .9rem;
-            margin-bottom: 20px;
-        }
-
-        .collection-overlay .card-cta {
-            color: #fff;
-            font-weight: 700;
-            font-size: .95rem;
-            transition: var(--transition);
-        }
-
-        .collection-card:hover {
-            transform: translateY(-10px);
-            border-color: #2D3D33;
-            box-shadow: 0 20px 45px rgba(45, 61, 51, .18);
-        }
-
-        .collection-card:hover img {
-            transform: scale(1.08);
-        }
-
-        .collection-card:hover .card-cta {
-            margin-left: 8px;
-        }
+        @media (max-width: 1000px) { .masonry-gallery { column-count: 4; } }
+        @media (max-width: 768px) { .masonry-gallery { column-count: 3; column-gap: 10px; } }
+        @media (max-width: 500px) { .masonry-gallery { column-count: 2; column-gap: 10px; } }
 
         .productos-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 14px;
         }
-
         .product-card {
             background: var(--surface);
-            border-radius: 20px;
+            border-radius: var(--radius);
             overflow: hidden;
             border: 1px solid var(--border);
             transition: var(--transition);
             cursor: pointer;
         }
-
         .product-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary);
-            box-shadow: 0 15px 35px rgba(45, 61, 51, .18);
+            transform: translateY(-4px);
+            border-color: var(--accent);
         }
-
         .product-card img {
             width: 100%;
             aspect-ratio: 3/4;
             object-fit: cover;
-            transition: .35s;
+            transition: var(--transition);
         }
-
-        .product-card:hover img {
-            transform: scale(1.05);
-        }
-
-        .product-info {
-            padding: 20px;
-        }
-
-        .product-info h3 {
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-        }
-
-        .product-price {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #2D3D33;
-            margin-bottom: 10px;
-        }
-
+        .product-card:hover img { transform: scale(1.04); }
+        .product-info { padding: 10px 14px; }
+        .product-info h3 { margin-bottom: 6px; font-size: 1rem; }
+        .product-price { font-size: 1rem; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
         .add-cart-btn {
             width: 100%;
-            padding: 12px;
-            border-radius: 12px;
+            padding: 10px;
+            border-radius: var(--radius);
             background: var(--surface-light);
             color: var(--text);
             font-weight: 600;
+            font-size: .9rem;
             transition: var(--transition);
         }
+        .add-cart-btn:hover { background: var(--primary); color: var(--text); }
 
-        .add-cart-btn:hover {
-            background: var(--primary);
-            color: #F5F2ED;
+        @media (max-width: 768px) {
+            .hero-overlay h1 { font-size: 1.8rem; }
+            .carousel-slide { aspect-ratio: 16/9; }
+            .hero { margin: 16px 0; }
+            .hero-overlay { padding: 24px; }
+            .carousel-arrow { width: 36px; height: 36px; font-size: 1.2rem; }
+            .carousel-arrow.left { left: 8px; }
+            .carousel-arrow.right { right: 8px; }
+            .carousel-dots { bottom: 12px; gap: 8px; }
+            .carousel-dot { width: 8px; height: 8px; }
+            .section-header h2 { font-size: 1.3rem; }
+            .colecciones-grid { grid-template-columns: 1fr; }
+            .colecciones-grid .collection-card:first-child { grid-column: 1; }
         }
-
-
-        .cat-card {
-            position: relative;
-            border-radius: 18px;
-            overflow: hidden;
-            background: #18181b;
-            border: 1px solid rgba(255, 255, 255, .08);
-            transition: all .35s ease;
-            cursor: pointer;
-            height: 340px;
-        }
-
-        .cat-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: .35s;
-        }
-
-        .cat-overlay {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 24px;
-            background: linear-gradient(to top, rgba(0, 0, 0, .9), rgba(0, 0, 0, .15));
-        }
-
-        .cat-overlay h3 {
-            color: #fff;
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .cat-overlay p {
-            color: #fff;
-            font-size: .85rem;
-            margin-bottom: 14px;
-            line-height: 1.5;
-        }
-
-        .cat-overlay span {
-            color: #fff;
-            font-weight: 600;
-            font-size: .9rem;
-            transition: .35s;
-        }
-
-        .cat-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(45, 61, 51, .18);
-        }
-
-        .cat-card:hover img {
-            transform: scale(1.08);
-        }
-
-        .cat-card:hover .cat-overlay span {
-            margin-left: 8px;
-        }
-
-        .cat-card.active {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px var(--primary);
-        }
-
-        @media (max-width: 900px) {
-            .hero-container {
-                grid-template-columns: 1fr;
-                justify-items: center;
-                text-align: center;
-            }
-
-            .hero-gallery {
-                display: none;
-            }
-
-            .hero-content p {
-                margin: 0 auto 40px;
-            }
-
-            .hero-content h1 {
-                font-size: 2.6rem;
-            }
-
-            .section-header h2 {
-                font-size: 2rem;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .colecciones-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .productos-grid {
-                grid-template-columns: 1fr;
-            }
+        @media (max-width: 480px) {
+            .hero-overlay h1 { font-size: 1.4rem; }
+            .hero-overlay p { font-size: .8rem; }
+            .productos-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 
 <body>
-    <div class="top-bar">
-        <p>✨ Diseños premium • Calidad garantizada • Envíos disponibles</p>
-    </div>
-
     <header class="header">
         <div class="container">
             <div class="logo" onclick="goHome()">
@@ -397,40 +303,59 @@
             </div>
             <nav class="nav" id="nav-categorias"></nav>
             <div class="header-actions">
-                <input type="text" id="search-nav-input" class="search-nav-input" placeholder="Buscar colecciones..." oninput="handleSearch()">
+                <div class="search-box">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.602 10.602Z" />
+                    </svg>
+                    <input type="text" id="search-nav-input" class="search-input" placeholder="Buscar colecciones..." oninput="handleSearch()">
+                </div>
                 <a href="carrito.html" class="cart-button" title="Carrito">🛒<span class="cart-count"
                         id="cart-counter">0</span></a>
                 <a href="admin.html" class="admin-btn" title="Admin">🔧</a>
+                <button class="hamburger" id="hamburger-btn" aria-label="Menú">
+                    <span></span><span></span><span></span>
+                </button>
             </div>
         </div>
     </header>
 
+    <!-- Drawer overlay -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <!-- Drawer panel -->
+    <div class="drawer" id="drawer-menu">
+        <div class="drawer-header">
+            <span class="logo-text">Poster<span>&</span>Poster</span>
+            <button class="drawer-close" id="drawer-close" aria-label="Cerrar">✕</button>
+        </div>
+        <nav class="drawer-nav" id="drawer-nav"></nav>
+    </div>
+
+    <!-- Mobile search overlay -->
+    <div class="search-mobile-overlay" id="search-mobile-overlay">
+        <input type="text" id="search-mobile-input" placeholder="Buscar colecciones..." oninput="handleSearchMobile()" onkeydown="if(event.key=='Enter'&&this.value.trim()){window.location='/?q='+encodeURIComponent(this.value.trim())}">
+        <button class="search-mobile-close" onclick="toggleSearchMobile()">✕</button>
+    </div>
+
     <main>
-        <section class="hero">
-            <div class="container hero-container">
-                <div class="hero-content">
-                    <span class="hero-tag">NUEVA COLECCIÓN</span>
-                    <h1>Tu diseño favorito,<br>en el cuadro perfecto.</h1>
-                    <p>Descubre cuadros y pósters premium inspirados en anime, videojuegos, deportes y cultura pop.</p>
-                </div>
-                <div class="hero-gallery" id="hero-gallery">
-                    <div class="hero-card hero-left"><img id="heroImg1" src="" alt="Serie"></div>
-                    <div class="hero-card hero-center"><img id="heroImg2" src="" alt="Serie"></div>
-                    <div class="hero-card hero-right"><img id="heroImg3" src="" alt="Serie"></div>
-                </div>
-            </div>
+        <section class="hero" id="hero-carousel">
+            <div class="carousel-track" id="carousel-track"></div>
+            <button class="carousel-arrow left" id="carousel-left" aria-label="Anterior">‹</button>
+            <button class="carousel-arrow right" id="carousel-right" aria-label="Siguiente">›</button>
+            <div class="carousel-dots" id="carousel-dots"></div>
         </section>
 
         <!-- CATEGORÍAS -->
-        <section class="bg-white py-20 md:py-28">
+        <section class="categorias-sec" id="categorias-sec">
             <div class="container">
-                <div class="text-center mb-14">
-                    <span class="text-brand-500 font-semibold tracking-[1px] text-sm uppercase">Categorías</span>
-                    <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-4">Explora por categorías</h2>
-                    <p class="text-zinc-400 max-w-xl mx-auto leading-relaxed">Encuentra fácilmente el diseño perfecto
-                        para ti.</p>
+                <div class="section-header">
+                    <span>Categorías</span>
+                    <h2>Explora por categorías</h2>
+                    <p>Encuentra el diseño perfecto para ti.</p>
                 </div>
-                <div id="categorias-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+                <div class="cat-scroll-wrapper">
+                    <div id="categorias-grid" class="card-container"></div>
+                    <button class="scroll-arrow" id="scroll-cat-right">→</button>
+                </div>
             </div>
         </section>
 
@@ -440,9 +365,8 @@
                     <div class="section-header">
                         <span>Colecciones</span>
                         <h2 id="titulo-colecciones">Colecciones destacadas</h2>
-                        <p>Explora nuestras sagas más populares y encuentra tu diseño favorito.</p>
                     </div>
-                    <div id="series-grid" class="colecciones-grid"></div>
+                    <div id="series-grid" class="masonry-gallery"></div>
                 </div>
             </section>
         </div>
@@ -465,9 +389,10 @@
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-col">
-                <img src="https://placehold.co/60x60/2D3D33/F5F2ED?text=PP" alt="Poster&Poster" class="footer-logo">
+                <img src="https://placehold.co/40x40/2D3D33/E8E0D6?text=PP" alt="Poster&Poster" class="footer-logo">
                 <h2>Poster&Poster</h2>
                 <p class="footer-text">Cuadros y posters premium inspirados en anime, videojuegos, deportes y cultura pop.</p>
+                <p class="footer-copy">© 2026 Poster&Poster • Todos los derechos reservados.</p>
             </div>
             <div class="footer-col">
                 <h3>Enlaces</h3>
@@ -478,19 +403,16 @@
             </div>
             <div class="footer-col">
                 <h3>Contacto</h3>
-                <p>📱 WhatsApp</p>
-                <a href="https://wa.me/584247041639">+58 4247041639</a>
+                <a href="https://wa.me/584247041639">WhatsApp</a>
                 <a href="#">Instagram</a>
                 <a href="#">TikTok</a>
-            </div>
-            <div class="footer-col">
+                <hr class="footer-divider">
                 <h3>Metodos de pago</h3>
-                <p>💲 Binance</p>
-                <p>🇨🇴 Pesos colombianos</p>
-                <p>🇻🇪 Bolivares</p>
+                <p>Binance</p>
+                <p>Pesos colombianos</p>
+                <p>Bolivares</p>
             </div>
         </div>
-        <div class="container footer-copy">© 2026 Poster&Poster • Todos los derechos reservados.</div>
     </footer>
 
     <script>
@@ -502,12 +424,59 @@
         const prodGrid = document.getElementById('productos-grid');
         const catGrid = document.getElementById('categorias-grid');
         const navCat = document.getElementById('nav-categorias');
-        const heroImgs = ['heroImg1', 'heroImg2', 'heroImg3'].map(id => document.getElementById(id));
         const cartCounter = document.getElementById('cart-counter');
         const coleccionesSec = document.getElementById('colecciones');
-        const heroSection = document.querySelector('.hero');
-        const categoriasSection = document.querySelector('.bg-white.py-20');
+        const heroSection = document.getElementById('hero-carousel');
+        const categoriasSection = document.getElementById('categorias-sec');
         const searchInput = document.getElementById('search-nav-input');
+        const drawerNav = document.getElementById('drawer-nav');
+        const drawerOverlay = document.getElementById('drawer-overlay');
+        const drawerMenu = document.getElementById('drawer-menu');
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+
+        // ── Cache data.json ──
+        function getCachedData() {
+            try {
+                const raw = sessionStorage.getItem('pp_data');
+                if (raw) return JSON.parse(raw);
+            } catch (e) { /* ignore */ }
+            return null;
+        }
+        function setCachedData(data) {
+            try { sessionStorage.setItem('pp_data', JSON.stringify(data)); } catch (e) { /* ignore */ }
+        }
+
+        // ── Hamburger / Drawer ──
+        function openDrawer() {
+            drawerMenu.classList.add('open');
+            drawerOverlay.classList.add('open');
+            hamburgerBtn.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeDrawer() {
+            drawerMenu.classList.remove('open');
+            drawerOverlay.classList.remove('open');
+            hamburgerBtn.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        function toggleDrawer() {
+            if (drawerMenu.classList.contains('open')) closeDrawer();
+            else openDrawer();
+        }
+
+        // ── Mobile search ──
+        window.toggleSearchMobile = () => {
+            if (!window.matchMedia('(max-width: 768px)').matches) return;
+            const overlay = document.getElementById('search-mobile-overlay');
+            const input = document.getElementById('search-mobile-input');
+            const isOpen = overlay.classList.toggle('open');
+            if (isOpen) { input.focus(); } else { input.value = ''; }
+        };
+        window.handleSearchMobile = () => {
+            const val = document.getElementById('search-mobile-input').value.trim().toLowerCase();
+            if (searchInput) searchInput.value = val;
+            window.handleSearch();
+        };
 
         window.goHome = () => {
             activeCategoryId = null;
@@ -525,6 +494,8 @@
 
         window.filterByCategory = (catId, catName) => {
             activeCategoryId = catId;
+            if (heroSection) heroSection.classList.add('hidden');
+            if (categoriasSection) categoriasSection.classList.add('hidden');
             viewHome.classList.remove('hidden');
             viewProd.classList.add('hidden');
             const sinC = allSeries.find(s => s.Nombre === 'Sin Coleccion');
@@ -533,7 +504,7 @@
                 filtered.push(sinC);
             }
             renderSeries(filtered);
-            document.getElementById('titulo-colecciones').textContent = `Colecciones de ${catName}`;
+            document.getElementById('titulo-colecciones').textContent = 'Colecciones de ' + catName;
             renderNav(catId);
             renderCategoriasCards(catId);
         };
@@ -574,6 +545,7 @@
                         '</div>' +
                         '</div>';
                 });
+                marcarProductosEnCarrito();
                 document.getElementById('titulo-colecciones').textContent = 'Resultados para "' + q + '"';
             } else if (matchingSeries.length) {
                 renderSeries(matchingSeries.filter(s => s.Nombre !== 'Sin Coleccion'));
@@ -596,6 +568,7 @@
                 prods = prods.filter(p => p.Categoria_ID == activeCategoryId);
             }
             renderProductos(prods);
+            marcarProductosEnCarrito();
             viewHome.classList.add('hidden');
             viewProd.classList.remove('hidden');
             window.scrollTo(0, 0);
@@ -654,19 +627,37 @@
             btn.textContent = '✓ Agregado';
             btn.style.background = '#22c55e';
             btn.style.color = '#000';
-            setTimeout(() => {
-                btn.textContent = 'Añadir al carrito';
-                btn.style.background = '';
-                btn.style.color = '';
-            }, 1000);
         };
+
+        function marcarProductosEnCarrito() {
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            const ids = new Set(carrito.map(i => i.id));
+            document.querySelectorAll('.product-card').forEach(card => {
+                const id = parseInt(card.dataset.id);
+                if (ids.has(id)) {
+                    const btn = card.querySelector('.add-cart-btn');
+                    if (btn) {
+                        btn.textContent = '✓ Agregado';
+                        btn.style.background = '#22c55e';
+                        btn.style.color = '#000';
+                    }
+                }
+            });
+        }
 
         function renderNav(activeCatId) {
             let html = '<a href="index.html" class="' + (!activeCatId ? 'active' : '') + '">Todo</a>';
             allCategorias.forEach(cat => {
-                html += '<a href="colecciones.html?categoria_id=' + cat.ID + '" class="' + (activeCatId == cat.ID ? 'active' : '') + '">' + cat.Nombre + '</a>';
+                const thumb = cat.URL_Imagen ? '<img class="nav-thumb" src="' + cat.URL_Imagen + '" onerror="this.style.display=\'none\'">' : '';
+                html += '<a href="colecciones.html?categoria_id=' + cat.ID + '" class="' + (activeCatId == cat.ID ? 'active' : '') + '">' + thumb + cat.Nombre + '</a>';
             });
             navCat.innerHTML = html;
+            // Also populate drawer (no thumbs to save space)
+            let dhtml = '<a href="index.html">Todo</a>';
+            allCategorias.forEach(cat => {
+                dhtml += '<a href="colecciones.html?categoria_id=' + cat.ID + '">' + cat.Nombre + '</a>';
+            });
+            drawerNav.innerHTML = dhtml;
         }
 
         function renderCategoriasCards(activeCatId) {
@@ -674,29 +665,35 @@
             catGrid.innerHTML = '';
             if (!allCategorias.length) return;
             allCategorias.forEach(cat => {
-                const count = allSeries.filter(s => s.Categoria_ID === cat.ID).length;
+                const seriesIds = allSeries.filter(s => s.Categoria_ID == cat.ID).map(s => s.ID);
+                const count = allProductos.filter(p => seriesIds.includes(p.Serie_ID)).length;
+                const img = cat.URL_Imagen || 'https://placehold.co/400x600/111111/A3836D?text=' + cat.Nombre.charAt(0);
                 catGrid.innerHTML +=
-                    '<a href="colecciones.html?categoria_id=' + cat.ID + '" class="cat-card block">' +
-                    '<img src="' + (cat.URL_Imagen || 'https://placehold.co/600x800/2D3D33/F5F2ED?text=' + cat.Nombre) + '" onerror="this.src=\'https://placehold.co/600x800/2D3D33/F5F2ED?text=' + cat.Nombre + '\'" alt="' + cat.Nombre + '">' +
-                    '<div class="cat-overlay">' +
-                    '<h3>' + cat.Nombre + '</h3>' +
-                    '<p>' + count + ' colecciones disponibles</p>' +
-                    '<span>Explorar →</span>' +
-                    '</div>' +
-                    '</a>';
+                    '<div class="category-card" style="background-image:url(' + img + ')" onclick="window.location=\'colecciones.html?categoria_id=' + cat.ID + '\'">' +
+                        '<div class="card-overlay"></div>' +
+                        '<div class="card-content">' +
+                            '<h3 class="card-title">' + cat.Nombre.toUpperCase() + '</h3>' +
+                            '<div class="card-desc">' + count + ' diseños</div>' +
+                            '<a href="colecciones.html?categoria_id=' + cat.ID + '" class="card-btn">Ver mas</a>' +
+                        '</div>' +
+                    '</div>';
             });
+            const arr = document.getElementById('scroll-cat-right');
+            if (catGrid.scrollWidth > catGrid.clientWidth) {
+                if (arr) arr.style.display = 'flex';
+                catGrid.style.justifyContent = '';
+            } else {
+                catGrid.style.justifyContent = 'center';
+            }
         }
 
         function renderSeries(list) {
             seriesGrid.innerHTML = '';
             if (!list.length) {
-                seriesGrid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text-secondary);padding:60px 0">No hay colecciones disponibles aún.</p>';
+                seriesGrid.innerHTML = '';
                 return;
             }
             list.forEach(s => {
-                const count = allProductos.filter(p => p.Serie_ID === s.ID).length;
-                const label = count + ' diseños';
-                const cta = 'Explorar →';
                 let imgSrc = s.URL_Imagen;
                 if (!imgSrc) {
                     let fp;
@@ -707,16 +704,15 @@
                     }
                     if (fp) imgSrc = fp.URL_Imagen;
                 }
-                if (!imgSrc) imgSrc = 'https://placehold.co/600x800/2D3D33/F5F2ED?text=' + s.Nombre;
+                if (!imgSrc) imgSrc = 'https://placehold.co/600x800/111111/A3836D?text=' + s.Nombre.charAt(0);
+                const cat = allCategorias.find(c => c.ID === s.Categoria_ID);
                 seriesGrid.innerHTML +=
-                    '<div onclick="openSerie(' + s.ID + ')" class="collection-card">' +
-                    '<img src="' + imgSrc + '" onerror="this.src=\'https://placehold.co/600x800/2D3D33/F5F2ED?text=' + s.Nombre + '\'" alt="' + s.Nombre + '">' +
-                    '<div class="collection-overlay">' +
-                    '<span class="card-label">' + label + '</span>' +
-                    '<h3>' + s.Nombre + '</h3>' +
-                    '<p>' + (s.Descripcion || '') + '</p>' +
-                    '<span class="card-cta">' + cta + '</span>' +
-                    '</div>' +
+                    '<div class="masonry-item" onclick="openSerie(' + s.ID + ')">' +
+                        '<div class="card-overlay"></div>' +
+                        '<div class="card-content" style="bottom:16px">' +
+                            '<span class="card-btn" style="padding:6px 18px;font-size:.8rem">' + s.Nombre + '</span>' +
+                        '</div>' +
+                        '<img src="' + imgSrc + '" onerror="this.src=\'https://placehold.co/600x800/111111/A3836D?text=' + s.Nombre.charAt(0) + '\'" alt="' + s.Nombre + '" loading="lazy">' +
                     '</div>';
             });
         }
@@ -724,7 +720,7 @@
         function renderProductos(list) {
             prodGrid.innerHTML = '';
             if (!list.length) {
-                prodGrid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text-secondary);padding:60px 0">No hay diseños en esta colección aún.</p>';
+                prodGrid.innerHTML = '';
                 return;
             }
             list.forEach(p => {
@@ -738,33 +734,116 @@
                     '</div>' +
                     '</div>';
             });
+            marcarProductosEnCarrito();
         }
 
-        function setHeroImages(series) {
-            const top3 = series.slice(0, 3);
-            heroImgs.forEach((img, i) => {
-                if (top3[i]) {
-                    img.src = top3[i].URL_Imagen || 'https://placehold.co/600x800/2D3D33/F5F2ED?text=SF';
-                    img.parentElement.onclick = () => openSerie(top3[i].ID);
-                }
+        function initCarousel(categorias) {
+            const track = document.getElementById('carousel-track');
+            const dotsContainer = document.getElementById('carousel-dots');
+            const btnLeft = document.getElementById('carousel-left');
+            const btnRight = document.getElementById('carousel-right');
+            if (!track || !categorias.length) return;
+            let current = 0, interval = null;
+
+            track.innerHTML = categorias.map(c => `
+                <div class="carousel-slide" onclick="location.href='colecciones.html?categoria_id=${c.ID}'">
+                    <img src="${c.URL_Imagen}" onerror="this.src='https://placehold.co/1400x600/111111/A3836D?text=${encodeURIComponent(c.Nombre)}'" alt="${c.Nombre}" loading="lazy">
+                    <div class="hero-overlay">
+                        <h1>Tu estilo,<br>en tu pared.</h1>
+                        <p>Posters premium de anime, videojuegos, deportes y cultura pop.</p>
+                        <span class="btn-primary">Explorar colecciones</span>
+                    </div>
+                </div>
+            `).join('');
+
+            dotsContainer.innerHTML = categorias.map((_, i) =>
+                `<button class="carousel-dot${i === 0 ? ' active' : ''}" data-index="${i}"></button>`
+            ).join('');
+
+            function goToSlide(index) {
+                if (index < 0) index = categorias.length - 1;
+                if (index >= categorias.length) index = 0;
+                current = index;
+                track.style.transform = 'translateX(-' + (current * 100) + '%)';
+                dotsContainer.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+                    dot.classList.toggle('active', i === current);
+                });
+            }
+
+            function startAuto() {
+                stopAuto();
+                interval = setInterval(() => goToSlide(current + 1), 4000);
+            }
+            function stopAuto() { if (interval) { clearInterval(interval); interval = null; } }
+
+            btnLeft.onclick = () => { goToSlide(current - 1); startAuto(); };
+            btnRight.onclick = () => { goToSlide(current + 1); startAuto(); };
+
+            dotsContainer.addEventListener('click', e => {
+                const dot = e.target.closest('.carousel-dot');
+                if (dot) { goToSlide(parseInt(dot.dataset.index)); startAuto(); }
             });
+
+            const heroEl = document.getElementById('hero-carousel');
+            heroEl.addEventListener('mouseenter', stopAuto);
+            heroEl.addEventListener('mouseleave', startAuto);
+
+            // Touch swipe
+            let startX = 0, startY = 0, isSwiping = false;
+            heroEl.addEventListener('touchstart', e => {
+                const t = e.touches[0];
+                startX = t.clientX; startY = t.clientY; isSwiping = true;
+            }, { passive: true });
+            heroEl.addEventListener('touchmove', e => {
+                if (!isSwiping) return;
+                const diffX = Math.abs(e.touches[0].clientX - startX);
+                const diffY = Math.abs(e.touches[0].clientY - startY);
+                if (diffY > diffX) isSwiping = false;
+            }, { passive: true });
+            heroEl.addEventListener('touchend', e => {
+                if (!isSwiping) return;
+                const endX = e.changedTouches[0].clientX;
+                const diff = endX - startX;
+                if (Math.abs(diff) > 50) {
+                    if (diff < 0) goToSlide(current + 1);
+                    else goToSlide(current - 1);
+                    startAuto();
+                }
+                isSwiping = false;
+            }, { passive: true });
+
+            startAuto();
         }
 
         document.addEventListener('DOMContentLoaded', async () => {
             try {
-                const r = await fetch('data.json');
-                if (r.ok) {
-                    const data = await r.json();
+                let data = getCachedData();
+                if (!data) {
+                    const r = await fetch('data.json');
+                    if (r.ok) {
+                        data = await r.json();
+                        setCachedData(data);
+                    }
+                }
+                if (data) {
                     allCategorias = data.categorias || [];
                     allSeries = data.series || [];
                     allProductos = data.productos || [];
                 }
                 renderNav(null);
                 renderCategoriasCards(null);
+                document.getElementById('scroll-cat-right')?.addEventListener('click', function() {
+                    document.getElementById('categorias-grid').scrollBy({ left: 320, behavior: 'smooth' });
+                });
                 renderSeries(allSeries.filter(s => s.Nombre !== 'Sin Coleccion'));
-                setHeroImages(allSeries.filter(s => s.Nombre !== 'Sin Coleccion'));
+                initCarousel(allCategorias.filter(c => c.URL_Imagen));
                 actualizarContadorCarrito();
-                if (typeof handleSearch === 'function') handleSearch();
+                marcarProductosEnCarrito();
+                const qParam = new URLSearchParams(window.location.search).get('q');
+                if (qParam && searchInput) {
+                    searchInput.value = qParam;
+                    handleSearch();
+                }
 
                 const footerCat = document.getElementById('footer-categorias');
                 if (footerCat && allCategorias.length) {
@@ -775,6 +854,19 @@
             } catch (e) {
                 console.error('Error al cargar datos:', e);
             }
+
+            // Hamburger events
+            if (hamburgerBtn) hamburgerBtn.addEventListener('click', toggleDrawer);
+            if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
+            document.getElementById('drawer-close')?.addEventListener('click', closeDrawer);
+
+            // Search icon mobile-only
+            document.querySelector('.search-icon')?.addEventListener('click', e => {
+                if (window.matchMedia('(max-width: 768px)').matches) {
+                    e.preventDefault();
+                    toggleSearchMobile();
+                }
+            });
         });
     </script>
 </body>

@@ -14,38 +14,50 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilos-compartidos.css">
     <style>
-        .collection-card {
-            position: relative; overflow: hidden; aspect-ratio: 2/3; border-radius: 24px;
-            border: 1px solid var(--border); background: var(--surface);
-            transition: var(--transition); cursor: pointer; display: block;
+        .masonry-gallery {
+            column-count: 5;
+            column-gap: 12px;
+            max-width: 1100px;
+            margin: 0 auto;
         }
-        .collection-card img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
-        .collection-overlay {
-            position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column;
-            justify-content: flex-end; padding: 30px;
-            background: linear-gradient(to top, rgba(0, 0, 0, .92), transparent);
+        .masonry-item {
+            position: relative;
+            break-inside: avoid;
+            margin-bottom: 14px;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+            transition: transform .2s ease;
+            overflow: hidden;
+            cursor: pointer;
         }
-        .collection-overlay .card-label {
-            font-family: 'Press Start 2P', monospace;
-            font-size: .6rem; color: #2D3D33; margin-bottom: 12px; letter-spacing: .5px;
+        .masonry-item:hover { transform: scale(1.03); }
+        .masonry-item img { width: 100%; display: block; height: auto; }
+        .badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: var(--primary);
+            color: var(--text);
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
+            z-index: 2;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
-        .collection-overlay h3 { font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.2; }
-        .collection-overlay p { color: #d6d6d6; line-height: 1.7; font-size: .9rem; margin-bottom: 20px; }
-        .collection-overlay .card-cta { color: #fff; font-weight: 700; font-size: .95rem; transition: var(--transition); }
-        .collection-card:hover { transform: translateY(-10px); border-color: #2D3D33; box-shadow: 0 20px 45px rgba(45, 61, 51, .18); }
-        .collection-card:hover img { transform: scale(1.08); }
-        .collection-card:hover .card-cta { margin-left: 8px; }
+        .masonry-item .card-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); z-index: 1; pointer-events: none; }
+        .masonry-item .card-content { position: absolute; left: 0; width: 100%; text-align: center; z-index: 2; pointer-events: none; }
+        .masonry-item .card-btn { pointer-events: auto; }
+        @media (max-width: 1000px) { .masonry-gallery { column-count: 4; } }
+        @media (max-width: 768px) { .masonry-gallery { column-count: 3; column-gap: 10px; } }
+        @media (max-width: 500px) { .masonry-gallery { column-count: 2; column-gap: 10px; } }
     </style>
 </head>
 
 <body>
-    <div class="top-bar">
-        <p>✨ Diseños premium • Calidad garantizada • Envíos disponibles</p>
-    </div>
-
     <header class="header">
         <div class="container">
             <a href="index.html" class="logo">
@@ -54,35 +66,61 @@
             </a>
             <nav class="nav" id="nav-categorias"></nav>
             <div class="header-actions">
-                <button class="cart-button" title="Carrito">🛒<span class="cart-count" id="cart-counter">0</span></button>
+                <div class="search-box">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.602 10.602Z" />
+                    </svg>
+                    <input type="text" id="search-nav-input" class="search-input" placeholder="Buscar colecciones..." onkeydown="if(event.key=='Enter'&&this.value.trim())window.location='/?q='+encodeURIComponent(this.value.trim())">
+                </div>
+                <a href="carrito.html" class="cart-button" title="Carrito">🛒<span class="cart-count" id="cart-counter">0</span></a>
                 <a href="index.html" class="btn-primary">Comprar</a>
                 <a href="admin.html" class="admin-btn" title="Admin">🔧</a>
+                <button class="hamburger" id="hamburger-btn" aria-label="Menú">
+                    <span></span><span></span><span></span>
+                </button>
             </div>
         </div>
     </header>
 
-    <main class="py-20">
+    <!-- Drawer overlay -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <!-- Drawer panel -->
+    <div class="drawer" id="drawer-menu">
+        <div class="drawer-header">
+            <span class="logo-text">Poster<span>&</span>Poster</span>
+            <button class="drawer-close" id="drawer-close" aria-label="Cerrar">✕</button>
+        </div>
+        <nav class="drawer-nav" id="drawer-nav"></nav>
+    </div>
+
+    <!-- Mobile search overlay -->
+    <div class="search-mobile-overlay" id="search-mobile-overlay">
+        <input type="text" id="search-mobile-input" placeholder="Buscar colecciones..." onkeydown="if(event.key=='Enter'&&this.value.trim()){window.location='/?q='+encodeURIComponent(this.value.trim())}">
+        <button class="search-mobile-close" onclick="toggleSearchMobile()">✕</button>
+    </div>
+
+    <main style="padding:24px 0 48px">
         <div class="container">
-            <a href="index.html" class="back-btn">← Volver a categorías</a>
+            <a href="index.html" class="back-btn">← Volver</a>
             <div class="breadcrumb">
                 <a href="index.html">Categorías</a>
                 <span>/</span>
                 <span class="current" id="breadcrumb-current">Colecciones</span>
             </div>
-            <div class="section-header text-center mb-16">
-                <h1 id="page-title" class="text-4xl md:text-5xl font-bold">Explora las colecciones</h1>
-                <p class="text-zinc-400 max-w-xl mx-auto mt-4 leading-relaxed">Selecciona una colección para ver todos sus personajes.</p>
+            <div class="section-header">
+                <h1 id="page-title">Explora las colecciones</h1>
             </div>
-            <div id="series-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+            <div id="series-grid" class="masonry-gallery"></div>
         </div>
     </main>
 
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-col">
-                <img src="https://placehold.co/60x60/2D3D33/F5F2ED?text=PP" alt="Poster&Poster" class="footer-logo">
+                <img src="https://placehold.co/40x40/2D3D33/E8E0D6?text=PP" alt="Poster&Poster" class="footer-logo">
                 <h2>Poster&Poster</h2>
                 <p class="footer-text">Cuadros y posters premium inspirados en anime, videojuegos, deportes y cultura pop.</p>
+                <p class="footer-copy">© 2026 Poster&Poster • Todos los derechos reservados.</p>
             </div>
             <div class="footer-col">
                 <h3>Enlaces</h3>
@@ -93,19 +131,16 @@
             </div>
             <div class="footer-col">
                 <h3>Contacto</h3>
-                <p>📱 WhatsApp</p>
-                <a href="https://wa.me/584247041639">+58 4247041639</a>
+                <a href="https://wa.me/584247041639">WhatsApp</a>
                 <a href="#">Instagram</a>
                 <a href="#">TikTok</a>
-            </div>
-            <div class="footer-col">
+                <hr class="footer-divider">
                 <h3>Metodos de pago</h3>
-                <p>💲 Binance</p>
-                <p>🇨🇴 Pesos colombianos</p>
-                <p>🇻🇪 Bolivares</p>
+                <p>Binance</p>
+                <p>Pesos colombianos</p>
+                <p>Bolivares</p>
             </div>
         </div>
-        <div class="container footer-copy">© 2026 Poster&Poster • Todos los derechos reservados.</div>
     </footer>
 
     <script>
@@ -114,12 +149,51 @@
             return p.get(name);
         }
 
+        // Cache
+        function getCachedData() {
+            try { const raw = sessionStorage.getItem('pp_data'); if (raw) return JSON.parse(raw); } catch (e) { /* */ }
+            return null;
+        }
+        function setCachedData(data) {
+            try { sessionStorage.setItem('pp_data', JSON.stringify(data)); } catch (e) { /* */ }
+        }
+
+        // Drawer
+        function openDrawer() {
+            document.getElementById('drawer-menu').classList.add('open');
+            document.getElementById('drawer-overlay').classList.add('open');
+            document.getElementById('hamburger-btn').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeDrawer() {
+            document.getElementById('drawer-menu').classList.remove('open');
+            document.getElementById('drawer-overlay').classList.remove('open');
+            document.getElementById('hamburger-btn').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        function toggleDrawer() {
+            if (document.getElementById('drawer-menu').classList.contains('open')) closeDrawer();
+            else openDrawer();
+        }
+
+        // Mobile search
+        window.toggleSearchMobile = () => {
+            if (!window.matchMedia('(max-width: 768px)').matches) return;
+            const overlay = document.getElementById('search-mobile-overlay');
+            const input = document.getElementById('search-mobile-input');
+            const isOpen = overlay.classList.toggle('open');
+            if (isOpen) input.focus(); else input.value = '';
+        };
+
         document.addEventListener('DOMContentLoaded', async () => {
             let allCategorias = [], allSeries = [], allProductos = [];
             try {
-                const r = await fetch('data.json');
-                if (r.ok) {
-                    const data = await r.json();
+                let data = getCachedData();
+                if (!data) {
+                    const r = await fetch('data.json');
+                    if (r.ok) { data = await r.json(); setCachedData(data); }
+                }
+                if (data) {
                     allCategorias = data.categorias || [];
                     allSeries = data.series || [];
                     allProductos = data.productos || [];
@@ -132,30 +206,32 @@
 
             // Nav
             const nav = document.getElementById('nav-categorias');
+            const drawerNav = document.getElementById('drawer-nav');
             nav.innerHTML = '<a href="index.html">Todo</a>';
+            let dhtml = '<a href="index.html">Todo</a>';
             allCategorias.forEach(c => {
-                nav.innerHTML += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + c.Nombre + '</a>';
+                const thumb = c.URL_Imagen ? '<img class="nav-thumb" src="' + c.URL_Imagen + '" onerror="this.style.display=\'none\'">' : '';
+                nav.innerHTML += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + thumb + c.Nombre + '</a>';
+                dhtml += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + c.Nombre + '</a>';
             });
+            drawerNav.innerHTML = dhtml;
 
             // Filter
             const catId = getParam('categoria_id');
-            let filtered = allSeries;
             let title = 'Explora las colecciones';
             let breadcrumbText = 'Colecciones';
+            let seriesList = allSeries.filter(s => s.Nombre !== 'Sin Coleccion');
             if (catId) {
                 const cat = allCategorias.find(c => c.ID == catId);
                 if (cat) {
-                    filtered = allSeries.filter(s => s.Categoria_ID == catId);
+                    seriesList = allSeries.filter(s => s.Categoria_ID == catId);
                     const sinC = allSeries.find(s => s.Nombre === 'Sin Coleccion');
                     if (sinC && allProductos.some(p => p.Serie_ID === sinC.ID && p.Categoria_ID == catId)) {
-                        filtered.push(sinC);
+                        seriesList.push(sinC);
                     }
                     title = 'Colecciones de ' + cat.Nombre;
                     breadcrumbText = cat.Nombre;
                 }
-            }
-            if (!catId) {
-                filtered = filtered.filter(s => s.Nombre !== 'Sin Coleccion');
             }
             document.getElementById('page-title').textContent = title;
             document.getElementById('breadcrumb-current').textContent = breadcrumbText;
@@ -167,20 +243,13 @@
                 });
             }
 
-            // Render
+            // Render series as masonry with overlay + pill
             const grid = document.getElementById('series-grid');
-            if (!filtered.length) {
-                grid.innerHTML = '<p class="text-zinc-500 text-center py-20 col-span-full">No hay colecciones disponibles aún.</p>';
+            grid.className = 'masonry-gallery';
+            if (!seriesList.length) {
+                grid.innerHTML = '';
             } else {
-                filtered.forEach(s => {
-                    let count;
-                    if (s.Nombre === 'Sin Coleccion' && catId) {
-                        count = allProductos.filter(p => p.Serie_ID === s.ID && p.Categoria_ID == catId).length;
-                    } else {
-                        count = allProductos.filter(p => p.Serie_ID === s.ID).length;
-                    }
-                    const label = s.Etiqueta || (count + ' diseños');
-                    const cta = s.CTA_Texto || 'Explorar →';
+                seriesList.forEach(s => {
                     let link = 'productos.html?serie_id=' + s.ID;
                     if (catId) link += '&categoria_id=' + catId;
                     let imgSrc = s.URL_Imagen;
@@ -193,19 +262,30 @@
                         }
                         if (fp) imgSrc = fp.URL_Imagen;
                     }
-                    if (!imgSrc) imgSrc = 'https://placehold.co/600x800/2D3D33/F5F2ED?text=' + s.Nombre;
+                    if (!imgSrc) imgSrc = 'https://placehold.co/600x800/111111/A3836D?text=' + s.Nombre.charAt(0);
                     grid.innerHTML +=
-                        '<a href="' + link + '" class="collection-card">' +
-                            '<img src="' + imgSrc + '" loading="lazy" onerror="this.src=\'https://placehold.co/600x800/2D3D33/F5F2ED?text=' + s.Nombre + '\'" alt="' + s.Nombre + '">' +
-                            '<div class="collection-overlay">' +
-                                '<span class="card-label">' + label + '</span>' +
-                                '<h3>' + s.Nombre + '</h3>' +
-                                '<p>' + (s.Descripcion || '') + '</p>' +
-                                '<span class="card-cta">' + cta + '</span>' +
+                        '<a href="' + link + '" class="masonry-item">' +
+                            '<div class="card-overlay"></div>' +
+                            '<div class="card-content" style="bottom:16px">' +
+                                '<span class="card-btn" style="padding:6px 18px;font-size:.8rem">' + s.Nombre + '</span>' +
                             '</div>' +
+                            '<img src="' + imgSrc + '" loading="lazy" onerror="this.src=\'https://placehold.co/600x800/111111/A3836D?text=' + s.Nombre.charAt(0) + '\'" alt="' + s.Nombre + '">' +
                         '</a>';
                 });
             }
+
+            // Hamburger events
+            document.getElementById('hamburger-btn')?.addEventListener('click', toggleDrawer);
+            document.getElementById('drawer-overlay')?.addEventListener('click', closeDrawer);
+            document.getElementById('drawer-close')?.addEventListener('click', closeDrawer);
+
+            // Search icon mobile-only
+            document.querySelector('.search-icon')?.addEventListener('click', e => {
+                if (window.matchMedia('(max-width: 768px)').matches) {
+                    e.preventDefault();
+                    toggleSearchMobile();
+                }
+            });
         });
     </script>
 </body>

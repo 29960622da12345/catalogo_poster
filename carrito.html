@@ -13,35 +13,33 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilos-compartidos.css">
     <style>
-        body { min-height: 100vh; display: flex; flex-direction: column; }
+        .cart-page { flex: 1; padding: 24px 0; }
+        .cart-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 6px; }
+        .cart-subtitle { color: var(--text-secondary); margin-bottom: 24px; font-size: .85rem; }
 
-        .cart-page { flex: 1; padding: 40px 0; }
-        .cart-title { font-size: 2.2rem; font-weight: 700; margin-bottom: 10px; }
-        .cart-subtitle { color: var(--text-secondary); margin-bottom: 40px; }
-
-        .cart-items { display: flex; flex-direction: column; gap: 20px; }
+        .cart-items { display: flex; flex-direction: column; gap: 12px; }
         .cart-item {
             display: grid;
             grid-template-columns: 100px 1fr auto;
             gap: 20px;
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 20px;
+            border-radius: var(--radius);
+            padding: 14px;
             align-items: center;
         }
         .cart-item-img {
-            width: 100px;
-            height: 133px;
+            width: 80px;
+            height: 106px;
             object-fit: cover;
-            border-radius: 12px;
+            border-radius: var(--radius);
         }
-        .cart-item-info h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 5px; }
-        .cart-item-info p { font-size: .85rem; color: var(--text-secondary); margin-bottom: 3px; }
-        .cart-item-price { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
+        .cart-item-info h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 4px; }
+        .cart-item-info p { font-size: .85rem; color: var(--text-secondary); margin-bottom: 2px; }
+        .cart-item-price { color: var(--accent); font-weight: 700; font-size: 1.1rem; }
 
         .cart-item-actions {
             display: flex;
@@ -59,9 +57,9 @@
             font-weight: bold;
             transition: var(--transition);
         }
-        .cart-qty-btn.minus { border-radius: 8px 0 0 8px; }
-        .cart-qty-btn.plus { border-radius: 0 8px 8px 0; }
-        .cart-qty-btn:hover { background: var(--primary); color: #F5F2ED; }
+        .cart-qty-btn.minus { border-radius: var(--radius) 0 0 var(--radius); }
+        .cart-qty-btn.plus { border-radius: 0 var(--radius) var(--radius) 0; }
+        .cart-qty-btn:hover { background: var(--primary); color: var(--text); }
         .cart-qty-input {
             width: 40px; height: 32px;
             text-align: center;
@@ -73,48 +71,39 @@
             font-size: .9rem;
             font-weight: 600;
         }
-        .cart-remove-btn {
-            color: #ef4444;
-            font-size: .85rem;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-        .cart-remove-btn:hover { color: #dc2626; text-decoration: underline; }
+        .cart-remove-btn { color: #ef4444; font-size: .85rem; font-weight: 500; transition: var(--transition); }
+        .cart-remove-btn:hover { color: #dc2626; }
 
         .cart-summary {
-            margin-top: 40px;
-            padding: 30px;
+            margin-top: 28px;
+            padding: 20px;
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 20px;
+            border-radius: var(--radius);
             max-width: 400px;
             margin-left: auto;
         }
-        .cart-summary h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 20px; }
-        .cart-summary-row { display: flex; justify-content: space-between; margin-bottom: 12px; color: var(--text-secondary); }
-        .cart-summary-total { display: flex; justify-content: space-between; font-size: 1.3rem; font-weight: 700; margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border); }
-        .cart-summary-total span:last-child { color: var(--primary); }
+        .cart-summary h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 14px; }
+        .cart-summary-row { display: flex; justify-content: space-between; margin-bottom: 8px; color: var(--text-secondary); font-size: .85rem; }
+        .cart-summary-total { display: flex; justify-content: space-between; font-size: 1.1rem; font-weight: 700; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+        .cart-summary-total span:last-child { color: var(--accent); }
         .checkout-btn {
             width: 100%;
-            padding: 15px;
-            margin-top: 20px;
+            padding: 12px;
+            margin-top: 16px;
             background: var(--primary);
-            color: #F5F2ED;
+            color: var(--text);
             border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: bold;
+            border-radius: var(--radius);
+            font-size: .95rem;
+            font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
         }
-        .checkout-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(45, 61, 51, .35); }
+        .checkout-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,.35); }
 
-        .cart-empty {
-            text-align: center;
-            padding: 80px 20px;
-        }
+        .cart-empty { text-align: center; padding: 60px 20px; }
         .cart-empty p { color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 25px; }
-
         .footer { margin-top: auto; }
 
         @media (max-width: 768px) {
@@ -125,10 +114,6 @@
     </style>
 </head>
 <body>
-    <div class="top-bar">
-        <p>✨ Diseños premium • Calidad garantizada • Envíos disponibles</p>
-    </div>
-
     <header class="header">
         <div class="container">
             <a href="index.html" class="logo">
@@ -137,12 +122,38 @@
             </a>
             <nav class="nav" id="nav-categorias"></nav>
             <div class="header-actions">
+                <div class="search-box">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.602 10.602Z" />
+                    </svg>
+                    <input type="text" id="search-nav-input" class="search-input" placeholder="Buscar colecciones..." onkeydown="if(event.key=='Enter'&&this.value.trim())window.location='/?q='+encodeURIComponent(this.value.trim())">
+                </div>
                 <a href="carrito.html" class="cart-button" title="Carrito">🛒<span class="cart-count" id="cart-counter">0</span></a>
                 <a href="index.html" class="btn-primary">Comprar</a>
                 <a href="admin.html" class="admin-btn" title="Admin">🔧</a>
+                <button class="hamburger" id="hamburger-btn" aria-label="Menú">
+                    <span></span><span></span><span></span>
+                </button>
             </div>
         </div>
     </header>
+
+    <!-- Drawer overlay -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <!-- Drawer panel -->
+    <div class="drawer" id="drawer-menu">
+        <div class="drawer-header">
+            <span class="logo-text">Poster<span>&</span>Poster</span>
+            <button class="drawer-close" id="drawer-close" aria-label="Cerrar">✕</button>
+        </div>
+        <nav class="drawer-nav" id="drawer-nav"></nav>
+    </div>
+
+    <!-- Mobile search overlay -->
+    <div class="search-mobile-overlay" id="search-mobile-overlay">
+        <input type="text" id="search-mobile-input" placeholder="Buscar colecciones..." onkeydown="if(event.key=='Enter'&&this.value.trim()){window.location='/?q='+encodeURIComponent(this.value.trim())}">
+        <button class="search-mobile-close" onclick="toggleSearchMobile()">✕</button>
+    </div>
 
     <main class="cart-page">
         <div class="container">
@@ -155,9 +166,10 @@
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-col">
-                <img src="https://placehold.co/60x60/2D3D33/F5F2ED?text=PP" alt="Poster&Poster" class="footer-logo">
+                <img src="https://placehold.co/40x40/2D3D33/E8E0D6?text=PP" alt="Poster&Poster" class="footer-logo">
                 <h2>Poster&Poster</h2>
                 <p class="footer-text">Cuadros y posters premium inspirados en anime, videojuegos, deportes y cultura pop.</p>
+                <p class="footer-copy">© 2026 Poster&Poster • Todos los derechos reservados.</p>
             </div>
             <div class="footer-col">
                 <h3>Enlaces</h3>
@@ -168,22 +180,52 @@
             </div>
             <div class="footer-col">
                 <h3>Contacto</h3>
-                <p>📱 WhatsApp</p>
-                <a href="https://wa.me/584247041639">+58 4247041639</a>
+                <a href="https://wa.me/584247041639">WhatsApp</a>
                 <a href="#">Instagram</a>
                 <a href="#">TikTok</a>
-            </div>
-            <div class="footer-col">
+                <hr class="footer-divider">
                 <h3>Metodos de pago</h3>
-                <p>💲 Binance</p>
-                <p>🇨🇴 Pesos colombianos</p>
-                <p>🇻🇪 Bolivares</p>
+                <p>Binance</p>
+                <p>Pesos colombianos</p>
+                <p>Bolivares</p>
             </div>
         </div>
-        <div class="container footer-copy">© 2026 Poster&Poster • Todos los derechos reservados.</div>
     </footer>
 
     <script>
+        function getCachedData() {
+            try { const raw = sessionStorage.getItem('pp_data'); if (raw) return JSON.parse(raw); } catch (e) { /* */ }
+            return null;
+        }
+        function setCachedData(data) {
+            try { sessionStorage.setItem('pp_data', JSON.stringify(data)); } catch (e) { /* */ }
+        }
+
+        function openDrawer() {
+            document.getElementById('drawer-menu').classList.add('open');
+            document.getElementById('drawer-overlay').classList.add('open');
+            document.getElementById('hamburger-btn').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeDrawer() {
+            document.getElementById('drawer-menu').classList.remove('open');
+            document.getElementById('drawer-overlay').classList.remove('open');
+            document.getElementById('hamburger-btn').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        function toggleDrawer() {
+            if (document.getElementById('drawer-menu').classList.contains('open')) closeDrawer();
+            else openDrawer();
+        }
+
+        window.toggleSearchMobile = () => {
+            if (!window.matchMedia('(max-width: 768px)').matches) return;
+            const overlay = document.getElementById('search-mobile-overlay');
+            const input = document.getElementById('search-mobile-input');
+            const isOpen = overlay.classList.toggle('open');
+            if (isOpen) input.focus(); else input.value = '';
+        };
+
         function actualizarContadorCarrito() {
             let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
             const total = carrito.reduce((sum, item) => sum + item.cantidad, 0);
@@ -257,6 +299,7 @@
         };
 
         window.eliminarItem = (index) => {
+            if (!confirm('¿Eliminar este artículo del carrito?')) return;
             let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
             carrito.splice(index, 1);
             localStorage.setItem('carrito', JSON.stringify(carrito));
@@ -270,22 +313,29 @@
 
         async function cargarNav() {
             try {
-                const r = await fetch('data.json');
-                if (r.ok) {
-                    const data = await r.json();
-                    const nav = document.getElementById('nav-categorias');
-                    if (nav && data.categorias) {
-                        nav.innerHTML = '<a href="index.html">Todo</a>';
-                        data.categorias.forEach(c => {
-                            nav.innerHTML += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + c.Nombre + '</a>';
-                        });
-                        const footerCat = document.getElementById('footer-categorias');
-                        if (footerCat) {
-                            data.categorias.forEach(c => {
-                                footerCat.innerHTML += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + c.Nombre + '</a>';
-                            });
-                        }
-                    }
+                let data = getCachedData();
+                if (!data) {
+                    const r = await fetch('data.json');
+                    if (r.ok) { data = await r.json(); setCachedData(data); }
+                }
+                if (!data || !data.categorias) return;
+                const nav = document.getElementById('nav-categorias');
+                const drawerNav = document.getElementById('drawer-nav');
+                if (nav) {
+                    nav.innerHTML = '<a href="index.html">Todo</a>';
+                    let dhtml = '<a href="index.html">Todo</a>';
+                    data.categorias.forEach(c => {
+                        const thumb = c.URL_Imagen ? '<img class="nav-thumb" src="' + c.URL_Imagen + '" onerror="this.style.display=\'none\'">' : '';
+                        nav.innerHTML += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + thumb + c.Nombre + '</a>';
+                        dhtml += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + c.Nombre + '</a>';
+                    });
+                    if (drawerNav) drawerNav.innerHTML = dhtml;
+                }
+                const footerCat = document.getElementById('footer-categorias');
+                if (footerCat) {
+                    data.categorias.forEach(c => {
+                        footerCat.innerHTML += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + c.Nombre + '</a>';
+                    });
                 }
             } catch (e) {
                 console.error('Error al cargar nav:', e);
@@ -295,6 +345,16 @@
         document.addEventListener('DOMContentLoaded', () => {
             renderCarrito();
             cargarNav();
+            document.getElementById('hamburger-btn')?.addEventListener('click', toggleDrawer);
+            document.getElementById('drawer-overlay')?.addEventListener('click', closeDrawer);
+            document.getElementById('drawer-close')?.addEventListener('click', closeDrawer);
+
+            document.querySelector('.search-icon')?.addEventListener('click', e => {
+                if (window.matchMedia('(max-width: 768px)').matches) {
+                    e.preventDefault();
+                    toggleSearchMobile();
+                }
+            });
         });
     </script>
 </body>

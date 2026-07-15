@@ -2,6 +2,39 @@ let allProductos = [], allCategorias = [], allSeries = [];
 let productoActual = null;
 let precioCalculado = 0;
 
+function getCachedData() {
+    try { const raw = sessionStorage.getItem('pp_data'); if (raw) return JSON.parse(raw); } catch (e) { /* */ }
+    return null;
+}
+function setCachedData(data) {
+    try { sessionStorage.setItem('pp_data', JSON.stringify(data)); } catch (e) { /* */ }
+}
+
+function openDrawer() {
+    document.getElementById('drawer-menu').classList.add('open');
+    document.getElementById('drawer-overlay').classList.add('open');
+    document.getElementById('hamburger-btn').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+function closeDrawer() {
+    document.getElementById('drawer-menu').classList.remove('open');
+    document.getElementById('drawer-overlay').classList.remove('open');
+    document.getElementById('hamburger-btn').classList.remove('active');
+    document.body.style.overflow = '';
+}
+function toggleDrawer() {
+    if (document.getElementById('drawer-menu').classList.contains('open')) closeDrawer();
+    else openDrawer();
+}
+
+window.toggleSearchMobile = () => {
+    if (!window.matchMedia('(max-width: 768px)').matches) return;
+    const overlay = document.getElementById('search-mobile-overlay');
+    const input = document.getElementById('search-mobile-input');
+    const isOpen = overlay.classList.toggle('open');
+    if (isOpen) input.focus(); else input.value = '';
+};
+
 function extraerNumeroPrecio(precioStr) {
     if (!precioStr) return 0;
     const match = precioStr.replace(/[^0-9.,]/g, '').replace(',', '.');
@@ -15,9 +48,12 @@ function formatearPrecio(num) {
 
 async function cargarDatos() {
     try {
-        const r = await fetch('data.json');
-        if (r.ok) {
-            const data = await r.json();
+        let data = getCachedData();
+        if (!data) {
+            const r = await fetch('data.json');
+            if (r.ok) { data = await r.json(); setCachedData(data); }
+        }
+        if (data) {
             allCategorias = data.categorias || [];
             allSeries = data.series || [];
             allProductos = data.productos || [];
@@ -51,7 +87,7 @@ async function cargarProducto() {
     document.getElementById('product-img-mockup').alt = productoActual.Nombre;
     document.getElementById('product-cat').textContent = productoActual.Categoria_Nombre || 'Categoría';
     document.getElementById('product-title').textContent = productoActual.Nombre;
-    document.getElementById('product-desc').textContent = 'Diseño exclusivo ' + productoActual.Nombre + ' de la colección ' + (productoActual.Serie_Nombre || '') + '. Impresión de alta calidad en papel premium.';
+
 
     actualizarPrecio();
     cargarRelacionados(allProductos);
@@ -194,32 +230,62 @@ document.getElementById('add-to-cart').addEventListener('click', () => {
     const btn = document.getElementById('add-to-cart');
     btn.textContent = '✓ Agregado';
     btn.style.background = '#22c55e';
-    setTimeout(() => {
-        btn.textContent = 'Añadir al carrito';
-        btn.style.background = '';
-    }, 1500);
 });
 
 function cargarNav() {
     const nav = document.getElementById('nav-categorias');
     if (!nav) return;
-    fetch('data.json').then(r => r.ok && r.json()).then(data => {
-        if (!data || !data.categorias) return;
+    const drawerNav = document.getElementById('drawer-nav');
+    let data = getCachedData();
+    if (data && data.categorias) {
         nav.innerHTML = '<a href="index.html">Todo</a>';
+        let dhtml = '<a href="index.html">Todo</a>';
         data.categorias.forEach(c => {
-            nav.innerHTML += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + c.Nombre + '</a>';
+            const thumb = c.URL_Imagen ? '<img class="nav-thumb" src="' + c.URL_Imagen + '" onerror="this.style.display=\'none\'">' : '';
+            nav.innerHTML += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + thumb + c.Nombre + '</a>';
+            dhtml += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + c.Nombre + '</a>';
         });
+        if (drawerNav) drawerNav.innerHTML = dhtml;
         const footerCat = document.getElementById('footer-categorias');
         if (footerCat) {
             data.categorias.forEach(c => {
                 footerCat.innerHTML += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + c.Nombre + '</a>';
             });
         }
-    }).catch(() => {});
+    } else {
+        fetch('data.json').then(r => r.ok && r.json()).then(data => {
+            if (!data || !data.categorias) return;
+            setCachedData(data);
+            nav.innerHTML = '<a href="index.html">Todo</a>';
+            let dhtml = '<a href="index.html">Todo</a>';
+            data.categorias.forEach(c => {
+                const thumb = c.URL_Imagen ? '<img class="nav-thumb" src="' + c.URL_Imagen + '" onerror="this.style.display=\'none\'">' : '';
+                nav.innerHTML += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + thumb + c.Nombre + '</a>';
+                dhtml += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + c.Nombre + '</a>';
+            });
+            if (drawerNav) drawerNav.innerHTML = dhtml;
+            const footerCat = document.getElementById('footer-categorias');
+            if (footerCat) {
+                data.categorias.forEach(c => {
+                    footerCat.innerHTML += '<a href="colecciones.html?categoria_id=' + c.ID + '">' + c.Nombre + '</a>';
+                });
+            }
+        }).catch(() => {});
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     cargarProducto();
     cargarNav();
     actualizarContadorCarrito();
+    document.getElementById('hamburger-btn')?.addEventListener('click', toggleDrawer);
+    document.getElementById('drawer-overlay')?.addEventListener('click', closeDrawer);
+    document.getElementById('drawer-close')?.addEventListener('click', closeDrawer);
+
+    document.querySelector('.search-icon')?.addEventListener('click', e => {
+        if (window.matchMedia('(max-width: 768px)').matches) {
+            e.preventDefault();
+            toggleSearchMobile();
+        }
+    });
 });
